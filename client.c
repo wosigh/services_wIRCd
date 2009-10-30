@@ -22,6 +22,20 @@
 #include "luna_service.h"
 #include "client.h"
 
+typedef enum {
+	msg_,
+	me_,
+	notice_,
+	join_,
+	part_,
+	invite_,
+	names_,
+	list_,
+	topic_,
+	channel_mode_,
+	kick_
+} irc_cmd;
+
 void *client_run(void *sessionToken) {
 
 	g_message("sessionToken : %s", (char*)sessionToken);
@@ -149,7 +163,7 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 }
 
-bool process_message_style_command(LSHandle* lshandle, LSMessage *message, int type) {
+bool process_message_style_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 
 	bool retVal = true;
 
@@ -173,9 +187,9 @@ bool process_message_style_command(LSHandle* lshandle, LSMessage *message, int t
 	if (client) {
 		int retVal = -1;
 		switch (type) {
-		case 1: retVal = irc_cmd_msg(client->session, nch, text); break;
-		case 2: retVal = irc_cmd_me(client->session, nch, text); break;
-		case 3: retVal = irc_cmd_notice(client->session, nch, text); break;
+		case msg_: retVal = irc_cmd_msg(client->session, nch, text); break;
+		case me_: retVal = irc_cmd_me(client->session, nch, text); break;
+		case notice_: retVal = irc_cmd_notice(client->session, nch, text); break;
 		}
 		char *jsonResponse = 0;
 		int len = 0;
@@ -197,13 +211,98 @@ bool process_message_style_command(LSHandle* lshandle, LSMessage *message, int t
 }
 
 bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, 1);
+	return process_message_style_command(lshandle, message, msg_);
 }
 
 bool client_cmd_me(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, 2);
+	return process_message_style_command(lshandle, message, me_);
 }
 
 bool client_cmd_notice(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, 3);
+	return process_message_style_command(lshandle, message, notice_);
+}
+
+bool process_channel_mgt_style_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
+
+	bool retVal = true;
+
+	LSError lserror;
+	LSErrorInit(&lserror);
+
+	json_t *object = LSMessageGetPayloadJSON(message);
+
+	char *sessionToken = 0;
+	char *channel = 0;
+	char *key = 0;
+	char *nick = 0;
+	char *topic = 0;
+	char *reason = 0;
+	char *mode = 0;
+
+	json_get_string(object, "sessionToken", &sessionToken);
+	json_get_string(object, "channel", &channel);
+
+	if (!sessionToken || !channel)
+		goto done;
+
+	if (type==join_) {
+		json_get_string(object, "key", &key);
+		if (!key)
+			goto done;
+	}
+
+	if (type==invite_ || type==kick_) {
+		json_get_string(object, "nick", &nick);
+		if (!nick)
+			goto done;
+	}
+
+	if (type==topic_) {
+		json_get_string(object, "topic", &topic);
+		if (!topic)
+			goto done;
+	}
+
+	if (type==kick_) {
+		json_get_string(object, "reason", &reason);
+		if (!reason)
+			goto done;
+	}
+
+	if (type==channel_mode_) {
+		json_get_string(object, "mode", &mode);
+		if (!mode)
+			goto done;
+	}
+
+	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
+	if (client) {
+		int retVal = -1;
+		switch (type) {
+		case join_: retVal = irc_cmd_join(client->session, channel, key); break;
+		case part_: retVal = irc_cmd_part(client->session, channel); break;
+		case invite_: retVal = irc_cmd_invite(client->session, nick, channel); break;
+		case names_: retVal = irc_cmd_names(client->session, channel); break;
+		case list_: retVal = irc_cmd_list(client->session, channel); break;
+		case topic_: retVal = irc_cmd_topic(client->session, channel, topic); break;
+		case channel_mode_: retVal = irc_cmd_channel_mode(client->session, channel, mode); break;
+		case kick_: retVal = irc_cmd_kick(client->session, nick, channel, reason); break;
+		}
+		char *jsonResponse = 0;
+		int len = 0;
+		len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
+		if (jsonResponse) {
+			LSMessageReply(lshandle,message,jsonResponse,&lserror);
+			free(jsonResponse);
+		} else
+			LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Generic error\"}",&lserror);
+	} else
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Invalid sessionToken\"}",&lserror);
+
+	done:
+
+	LSErrorFree(&lserror);
+
+	return retVal;
+
 }
