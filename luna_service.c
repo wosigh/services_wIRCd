@@ -43,6 +43,8 @@ LSMethod lsmethods[] = {
 		{"client_cmd_topic",client_cmd_topic},
 		{"client_cmd_channel_mode",client_cmd_channel_mode},
 		{"client_cmd_kick",client_cmd_kick},
+		// Misc methods
+		{"client_cmd_nick",client_cmd_nick},
 		{0,0}
 };
 

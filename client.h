@@ -54,5 +54,6 @@ bool client_cmd_list(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_topic(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_channel_mode(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_kick(LSHandle* lshandle, LSMessage *message, void *ctx);
+bool client_cmd_nick(LSHandle* lshandle, LSMessage *message, void *ctx);
 
 #endif /* CLIENT_H_ */

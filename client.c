@@ -33,7 +33,8 @@ typedef enum {
 	list_,
 	topic_,
 	channel_mode_,
-	kick_
+	kick_,
+	nick_
 } irc_cmd;
 
 void *client_run(void *sessionToken) {
@@ -183,52 +184,52 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 	char *mode = 0;
 
 	json_get_string(object, "sessionToken", &sessionToken);
+	json_get_string(object, "nch", &nch);
+	json_get_string(object, "text", &text);
+	json_get_string(object, "channel", &channel);
+	json_get_string(object, "key", &key);
+	json_get_string(object, "nick", &nick);
+	json_get_string(object, "topic", &topic);
+	json_get_string(object, "reason", &reason);
+	json_get_string(object, "mode", &mode);
 
 	if (!sessionToken)
 		goto done;
 
-	if (type==msg_||type==me_||type==notice_) {
-		json_get_string(object, "nch", &nch);
-		json_get_string(object, "text", &text);
+	/*if (type==msg_||type==me_||type==notice_) {
 		if (!nch || !text)
 			goto done;
 	}
 
 	if (type==join_||type==invite_||type==topic_||type==kick_||type==part_||type==names_||type==list_||type==channel_mode_) {
-		json_get_string(object, "channel", &channel);
 		if (!channel)
 			goto done;
 	}
 
 	if (type==join_) {
-		json_get_string(object, "key", &key);
 		if (!key)
 			goto done;
 	}
 
 	if (type==invite_ || type==kick_) {
-		json_get_string(object, "nick", &nick);
 		if (!nick)
 			goto done;
 	}
 
 	if (type==topic_) {
-		json_get_string(object, "topic", &topic);
 		if (!topic)
 			goto done;
 	}
 
 	if (type==kick_) {
-		json_get_string(object, "reason", &reason);
 		if (!reason)
 			goto done;
 	}
 
 	if (type==channel_mode_) {
-		json_get_string(object, "mode", &mode);
 		if (!mode)
 			goto done;
-	}
+	}*/
 
 	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
 	if (client) {
@@ -245,6 +246,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case topic_: retVal = irc_cmd_topic(client->session, channel, topic); break;
 		case channel_mode_: retVal = irc_cmd_channel_mode(client->session, channel, mode); break;
 		case kick_: retVal = irc_cmd_kick(client->session, nick, channel, reason); break;
+		case nick_: retVal = irc_cmd_nick(client->session, nick); break;
 		}
 		char *jsonResponse = 0;
 		int len = 0;
@@ -308,4 +310,8 @@ bool client_cmd_channel_mode(LSHandle* lshandle, LSMessage *message, void *ctx) 
 
 bool client_cmd_kick(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, kick_);
+}
+
+bool client_cmd_nick(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, nick_);
 }
