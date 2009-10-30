@@ -174,12 +174,18 @@ bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		goto done;
 
 	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
-	irc_cmd_msg(client->session, nch, text);
-
-	/*if (client && (==0))
-		LSMessageReply(lshandle,message,"{\"returnValue\":0}",&lserror);
-	else
-		LSMessageReply(lshandle,message,"{\"returnValue\":-1}",&lserror);*/
+	if (client) {
+		int retVal = irc_cmd_msg(client->session, nch, text);
+		char *jsonResponse = 0;
+		int len = 0;
+		len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
+		if (jsonResponse) {
+			LSMessageReply(lshandle,message,jsonResponse,&lserror);
+			free(jsonResponse);
+		} else
+			LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Generic error\"}",&lserror);
+	} else
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Invalid sessionToken\"}",&lserror);
 
 	done:
 
