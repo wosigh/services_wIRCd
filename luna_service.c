@@ -87,12 +87,14 @@ void luna_service_start() {
 
 	memset(&callbacks, 0, sizeof(callbacks));
 	callbacks.event_connect = dump_event;
+	callbacks.event_join = dump_event;
 	callbacks.event_nick = dump_event;
 	callbacks.event_quit = dump_event;
 	callbacks.event_part = dump_event;
 	callbacks.event_mode = dump_event;
 	callbacks.event_topic = dump_event;
 	callbacks.event_kick = dump_event;
+	callbacks.event_channel = dump_event;
 	callbacks.event_notice = dump_event;
 	callbacks.event_invite = dump_event;
 	callbacks.event_umode = dump_event;
