@@ -47,6 +47,7 @@ LSMethod lsmethods[] = {
 		{"client_cmd_nick",client_cmd_nick},
 		{"client_cmd_quit",client_cmd_quit},
 		{"client_cmd_whois",client_cmd_whois},
+		{"client_cmd_user_mode",client_cmd_user_mode},
 		{0,0}
 };
 
