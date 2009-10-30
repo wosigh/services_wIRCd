@@ -41,16 +41,16 @@ void *client_run(void *sessionToken) {
 	json_t *object = LSMessageGetPayloadJSON(client->message);
 
 	// Basic connection info
-	json_get_string(object, "server", client->server); // Required
+	json_get_string(object, "server", &client->server); // Required
 	json_get_int(object, "port", client->port);
 
 	// Server related connection info
-	json_get_string(object, "username", client->username);
-	json_get_string(object, "server_password", client->server_password);
+	json_get_string(object, "username", &client->username);
+	json_get_string(object, "server_password", &client->server_password);
 
 	// Basic user info
-	json_get_string(object, "nick", client->nick); // Required
-	json_get_string(object, "realname", client->realname);
+	json_get_string(object, "nick", &client->nick); // Required
+	json_get_string(object, "realname", &client->realname);
 
 	if (!client->server) {
 		LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);
@@ -132,7 +132,7 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	g_hash_table_insert(session_thread_table, (gpointer)sessionToken, (gpointer)client);
 
-    if (pthread_create(client->thread, NULL, client_run, (void*)sessionToken)) {
+    if (pthread_create(&client->thread, NULL, client_run, (void*)sessionToken)) {
     	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
     	retVal = false;
     }
