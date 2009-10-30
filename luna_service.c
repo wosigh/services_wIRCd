@@ -19,17 +19,13 @@
 #include <string.h>
 
 #include <glib.h>
-#include <lunaservice.h>
 
+#include "luna_service.h"
 #include "client.h"
 
 const char 		*dbusAddress 		= "us.ryanhope.wIRCd";
 
 GMainLoop		*loop				= NULL;
-
-LSPalmService	*serviceHandle		= NULL;
-LSHandle		*pub_serviceHandle	= NULL;
-LSHandle		*priv_serviceHandle	= NULL;
 
 LSMethod lsmethods[] = {
 		{"client_connect",client_connect},

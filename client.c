@@ -19,9 +19,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+#include "luna_service.h"
 #include "client.h"
-
-irc_session_t *session;
 
 bool join = true;
 
@@ -43,7 +42,18 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 		strcat (buf, params[cnt]);
 	}
 
-	g_message("Event \"%s\", origin: \"%s\", params: %d [%s]", event, origin ? origin : "NULL", cnt, buf);
+	int len = 0;
+	char *jsonResponse = 0;
+	len = asprintf(&jsonResponse, "Event \"%s\", origin: \"%s\", params: %d [%s]", event, origin ? origin : "NULL", cnt, buf);
+
+	if (jsonResponse) {
+		LSError lserror;
+		LSErrorInit(&lserror);
+		LSMessage *message = (LSMessage*)irc_get_ctx(session);
+		LSMessageReply(pub_serviceHandle,message,jsonResponse,&lserror);
+		LSErrorFree(&lserror);
+		free(jsonResponse);
+	}
 
 	if (join) {
 		irc_cmd_join(session,"#webos-internals",0);
@@ -83,19 +93,18 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		goto done;
 	}
 
-	session = irc_create_session(&callbacks);
+	irc_session_t *session = irc_create_session(&callbacks);
 	if (!session)
 		goto done;
 
 	if (irc_connect(session, server, port, server_password, nick, username, realname))
 		goto done;
 
-	//irc_cmd_join(session,"#webos-internals",0);
 
-	/*LSMessageRef(message);
-	g_hash_table_insert(session_message_table, &session, message);
+	LSMessageRef(message);
+	irc_set_ctx(session,message);
 
-	pthread_t thread;
+	/*pthread_t thread;
     if (pthread_create(&thread, NULL, client_run, NULL))
     	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);*/
 

@@ -21,6 +21,12 @@
 
 #include <stdbool.h>
 
+#include <lunaservice.h>
+
+LSPalmService	*serviceHandle;
+LSHandle		*pub_serviceHandle;
+LSHandle		*priv_serviceHandle;
+
 void luna_service_start();
 void luna_service_cleanup();
 
