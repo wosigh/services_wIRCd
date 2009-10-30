@@ -81,15 +81,15 @@ void luna_service_start() {
 	callbacks.event_ctcp_action = dump_event;
 	callbacks.event_unknown = dump_event;
 
-	session_message_table = g_hash_table_new(g_str_hash, g_str_equal);
-	if (session_message_table)
+	session_thread_table = g_hash_table_new(g_str_hash, g_str_equal);
+	if (session_thread_table)
 		g_main_loop_run(loop);
 
 }
 
 void luna_service_cleanup() {
 
-	if (session_message_table)
-		g_hash_table_destroy(session_message_table);
+	if (session_thread_table)
+		g_hash_table_destroy(session_thread_table);
 
 }

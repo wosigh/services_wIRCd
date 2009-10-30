@@ -19,15 +19,18 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
+#include <pthread.h>
+
 #include <lunaservice.h>
 #include <libircclient.h>
 
 typedef struct {
-	char *channel;
-	char *nick;
-} irc_ctx_t;
+	irc_session_t	*session;
+	pthread_t		*thread;
+	LSMessage		*message;
+} wIRCd_client_t;
 
-GHashTable *session_message_table;
+GHashTable *session_thread_table;
 
 irc_callbacks_t	callbacks;
 

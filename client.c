@@ -24,8 +24,11 @@
 
 bool join = true;
 
-void *client_run(void *session) {
-	irc_run(session);
+void *client_run(void *sessionToken) {
+	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(session_thread_table, (char*)sessionToken);
+	g_message("Start-Thread");
+	irc_run(client->session);
+	g_message("End-Thread");
 }
 
 void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
@@ -49,8 +52,8 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 	if (jsonResponse) {
 		LSError lserror;
 		LSErrorInit(&lserror);
-		LSMessage *message = (LSMessage*)irc_get_ctx(session);
-		LSMessageReply(pub_serviceHandle,message,jsonResponse,&lserror);
+		wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(session_thread_table, (char*)irc_get_ctx(session));
+		LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
 		free(jsonResponse);
 	}
@@ -78,11 +81,16 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	json_t *object = LSMessageGetPayloadJSON(message);
 
-	json_get_string(object, "server", &server);
+	// Basic connection info
+	json_get_string(object, "server", &server); // Required
 	json_get_int(object, "port", port);
-	json_get_string(object, "server_password", &server_password);
-	json_get_string(object, "nick", &nick);
+
+	// Server related connection info
 	json_get_string(object, "username", &username);
+	json_get_string(object, "server_password", &server_password);
+
+	// Basic user info
+	json_get_string(object, "nick", &nick); // Required
 	json_get_string(object, "realname", &realname);
 
 	if (!server) {
@@ -93,27 +101,33 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		goto done;
 	}
 
-	irc_session_t *session = irc_create_session(&callbacks);
-	if (!session)
-		goto done;
-
-	if (irc_connect(session, server, port, server_password, nick, username, realname))
-		goto done;
-
-
 	LSMessageRef(message);
-	irc_set_ctx(session,message);
 
-	/*pthread_t thread;
-    if (pthread_create(&thread, NULL, client_run, NULL))
-    	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);*/
+	const char* sessionToken = LSMessageGetUniqueToken(message)+1;
 
-	irc_run(session);
+	wIRCd_client_t *client = malloc(sizeof(wIRCd_client_t));
+	client->session = irc_create_session(&callbacks);
+	client->message = message;
+
+	if (!client->session)
+		goto done;
+
+	g_hash_table_insert(session_thread_table, (gpointer)sessionToken, (gpointer)client);
+
+	if (irc_connect(client->session, server, port, server_password, nick, username, realname))
+		goto done;
+
+	irc_set_ctx(client->session,(void*)sessionToken);
+
+    if (pthread_create(client->thread, NULL, client_run, (void*)sessionToken))
+    	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
+
+	irc_run(client->session);
 
 	done:
 
-	if (session)
-		irc_destroy_session(session);
+	if (client->session)
+		irc_destroy_session(client->session);
 
 	LSErrorFree(&lserror);
 
