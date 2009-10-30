@@ -184,7 +184,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 
 	json_get_string(object, "sessionToken", &sessionToken);
 
-	if (!sessionToken || !channel)
+	if (!sessionToken)
 		goto done;
 
 	if (type==msg_||type==me_||type==notice_) {
