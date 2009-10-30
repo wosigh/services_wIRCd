@@ -16,6 +16,8 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  =============================================================================*/
 
+#include <string.h>
+
 #include <glib.h>
 #include <lunaservice.h>
 
@@ -68,15 +70,30 @@ bool luna_service_initialize() {
 
 void luna_service_start() {
 
-	client_sessions = g_hash_table_new(g_str_hash, g_str_equal);
-	if (client_sessions)
+	memset(&callbacks, 0, sizeof(callbacks));
+	callbacks.event_connect = dump_event;
+	callbacks.event_nick = dump_event;
+	callbacks.event_quit = dump_event;
+	callbacks.event_part = dump_event;
+	callbacks.event_mode = dump_event;
+	callbacks.event_topic = dump_event;
+	callbacks.event_kick = dump_event;
+	callbacks.event_notice = dump_event;
+	callbacks.event_invite = dump_event;
+	callbacks.event_umode = dump_event;
+	callbacks.event_ctcp_rep = dump_event;
+	callbacks.event_ctcp_action = dump_event;
+	callbacks.event_unknown = dump_event;
+
+	session_message_table = g_hash_table_new(g_str_hash, g_str_equal);
+	if (session_message_table)
 		g_main_loop_run(loop);
 
 }
 
 void luna_service_cleanup() {
 
-	if (client_sessions)
-		g_hash_table_destroy(client_sessions);
+	if (session_message_table)
+		g_hash_table_destroy(session_message_table);
 
 }

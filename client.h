@@ -19,14 +19,20 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
-#include <pthread.h>
-
 #include <lunaservice.h>
 #include <libircclient.h>
 
-GHashTable *client_sessions;
+typedef struct {
+	char *channel;
+	char *nick;
+} irc_ctx_t;
 
-bool client_create_session(LSHandle* lshandle, LSMessage *message, void *ctx);
+GHashTable *session_message_table;
+
+irc_callbacks_t	callbacks;
+
+void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
+
 bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx);
 
 #endif /* CLIENT_H_ */

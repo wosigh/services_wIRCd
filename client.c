@@ -17,9 +17,40 @@
  =============================================================================*/
 
 #include <stdlib.h>
-#include <string.h>
+#include <pthread.h>
 
 #include "client.h"
+
+irc_session_t *session;
+
+bool join = true;
+
+void *client_run(void *session) {
+	irc_run(session);
+}
+
+void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
+
+	char buf[512];
+	int cnt;
+
+	buf[0] = '\0';
+
+	for ( cnt = 0; cnt < count; cnt++ ) {
+		if ( cnt )
+			strcat (buf, "|");
+
+		strcat (buf, params[cnt]);
+	}
+
+	g_message("Event \"%s\", origin: \"%s\", params: %d [%s]", event, origin ? origin : "NULL", cnt, buf);
+
+	if (join) {
+		irc_cmd_join(session,"#webos-internals",0);
+		join = false;
+	}
+
+}
 
 bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
@@ -52,15 +83,23 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		goto done;
 	}
 
-	irc_callbacks_t	callbacks;
-	memset(&callbacks, 0, sizeof(callbacks));
-
-	irc_session_t *session = irc_create_session(&callbacks);
+	session = irc_create_session(&callbacks);
 	if (!session)
 		goto done;
 
 	if (irc_connect(session, server, port, server_password, nick, username, realname))
 		goto done;
+
+	//irc_cmd_join(session,"#webos-internals",0);
+
+	/*LSMessageRef(message);
+	g_hash_table_insert(session_message_table, &session, message);
+
+	pthread_t thread;
+    if (pthread_create(&thread, NULL, client_run, NULL))
+    	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);*/
+
+	irc_run(session);
 
 	done:
 
