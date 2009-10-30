@@ -26,6 +26,8 @@ bool join = true;
 
 void *client_run(void *sessionToken) {
 
+	g_message("sessionToken : %s", (char*)sessionToken);
+
 	LSError lserror;
 	LSErrorInit(&lserror);
 
@@ -144,6 +146,42 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
     	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
     	retVal = false;
     }
+
+	LSErrorFree(&lserror);
+
+	return retVal;
+
+}
+
+bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
+
+	bool retVal = true;
+
+	LSError lserror;
+	LSErrorInit(&lserror);
+
+	json_t *object = LSMessageGetPayloadJSON(message);
+
+	char *sessionToken = 0;
+	char *nch = 0;
+	char *text = 0;
+
+	json_get_string(object, "sessionToken", &sessionToken);
+	json_get_string(object, "nch", &nch);
+	json_get_string(object, "text", &text);
+
+	if (!sessionToken || !nch || !text)
+		goto done;
+
+	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
+	irc_cmd_msg(client->session, nch, text);
+
+	/*if (client && (==0))
+		LSMessageReply(lshandle,message,"{\"returnValue\":0}",&lserror);
+	else
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1}",&lserror);*/
+
+	done:
 
 	LSErrorFree(&lserror);
 
