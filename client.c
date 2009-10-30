@@ -163,7 +163,7 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 }
 
-bool process_message_style_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
+bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 
 	bool retVal = true;
 
@@ -175,63 +175,6 @@ bool process_message_style_command(LSHandle* lshandle, LSMessage *message, irc_c
 	char *sessionToken = 0;
 	char *nch = 0;
 	char *text = 0;
-
-	json_get_string(object, "sessionToken", &sessionToken);
-	json_get_string(object, "nch", &nch);
-	json_get_string(object, "text", &text);
-
-	if (!sessionToken || !nch || !text)
-		goto done;
-
-	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
-	if (client) {
-		int retVal = -1;
-		switch (type) {
-		case msg_: retVal = irc_cmd_msg(client->session, nch, text); break;
-		case me_: retVal = irc_cmd_me(client->session, nch, text); break;
-		case notice_: retVal = irc_cmd_notice(client->session, nch, text); break;
-		}
-		char *jsonResponse = 0;
-		int len = 0;
-		len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
-		if (jsonResponse) {
-			LSMessageReply(lshandle,message,jsonResponse,&lserror);
-			free(jsonResponse);
-		} else
-			LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Generic error\"}",&lserror);
-	} else
-		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Invalid sessionToken\"}",&lserror);
-
-	done:
-
-	LSErrorFree(&lserror);
-
-	return retVal;
-
-}
-
-bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, msg_);
-}
-
-bool client_cmd_me(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, me_);
-}
-
-bool client_cmd_notice(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, notice_);
-}
-
-bool process_channel_mgt_style_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
-
-	bool retVal = true;
-
-	LSError lserror;
-	LSErrorInit(&lserror);
-
-	json_t *object = LSMessageGetPayloadJSON(message);
-
-	char *sessionToken = 0;
 	char *channel = 0;
 	char *key = 0;
 	char *nick = 0;
@@ -240,10 +183,22 @@ bool process_channel_mgt_style_command(LSHandle* lshandle, LSMessage *message, i
 	char *mode = 0;
 
 	json_get_string(object, "sessionToken", &sessionToken);
-	json_get_string(object, "channel", &channel);
 
 	if (!sessionToken || !channel)
 		goto done;
+
+	if (type==msg_||type==me_||type==notice_) {
+		json_get_string(object, "nch", &nch);
+		json_get_string(object, "text", &text);
+		if (!nch || !text)
+			goto done;
+	}
+
+	if (type==join_||type==invite_||type==topic_||type==kick_||type==part_||type==names_||type==list_||type==channel_mode_) {
+		json_get_string(object, "channel", &channel);
+		if (!channel)
+			goto done;
+	}
 
 	if (type==join_) {
 		json_get_string(object, "key", &key);
@@ -279,6 +234,9 @@ bool process_channel_mgt_style_command(LSHandle* lshandle, LSMessage *message, i
 	if (client) {
 		int retVal = -1;
 		switch (type) {
+		case msg_: retVal = irc_cmd_msg(client->session, nch, text); break;
+		case me_: retVal = irc_cmd_me(client->session, nch, text); break;
+		case notice_: retVal = irc_cmd_notice(client->session, nch, text); break;
 		case join_: retVal = irc_cmd_join(client->session, channel, key); break;
 		case part_: retVal = irc_cmd_part(client->session, channel); break;
 		case invite_: retVal = irc_cmd_invite(client->session, nick, channel); break;
@@ -307,34 +265,47 @@ bool process_channel_mgt_style_command(LSHandle* lshandle, LSMessage *message, i
 
 }
 
+
+bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, msg_);
+}
+
+bool client_cmd_me(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, me_);
+}
+
+bool client_cmd_notice(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, notice_);
+}
+
 bool client_cmd_join(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, join_);
+	return process_command(lshandle, message, join_);
 }
 
 bool client_cmd_part(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, part_);
+	return process_command(lshandle, message, part_);
 }
 
 bool client_cmd_invite(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, invite_);
+	return process_command(lshandle, message, invite_);
 }
 
 bool client_cmd_names(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, names_);
+	return process_command(lshandle, message, names_);
 }
 
 bool client_cmd_list(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, list_);
+	return process_command(lshandle, message, list_);
 }
 
 bool client_cmd_topic(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, topic_);
+	return process_command(lshandle, message, topic_);
 }
 
 bool client_cmd_channel_mode(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, channel_mode_);
+	return process_command(lshandle, message, channel_mode_);
 }
 
 bool client_cmd_kick(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_message_style_command(lshandle, message, kick_);
+	return process_command(lshandle, message, kick_);
 }
