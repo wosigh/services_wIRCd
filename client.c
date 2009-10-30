@@ -22,8 +22,6 @@
 #include "luna_service.h"
 #include "client.h"
 
-bool join = true;
-
 void *client_run(void *sessionToken) {
 
 	g_message("sessionToken : %s", (char*)sessionToken);
@@ -120,11 +118,6 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 		LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
 		free(jsonResponse);
-	}
-
-	if (join) {
-		irc_cmd_join(session,"#webos-internals",0);
-		join = false;
 	}
 
 }
