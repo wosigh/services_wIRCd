@@ -94,26 +94,29 @@ void *client_run(void *sessionToken) {
 
 void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
 
-	char buf[512];
+	char *sessionToken = (char*)irc_get_ctx(session);
+
+	char buf[1024];
 	int cnt;
 
 	buf[0] = '\0';
 
-	for ( cnt = 0; cnt < count; cnt++ ) {
-		if ( cnt )
-			strcat (buf, "|");
-
-		strcat (buf, params[cnt]);
+	for (cnt = 0; cnt < count; cnt++) {
+		if (cnt)
+			strcat(buf, ",");
+		strcat(buf, "\"");
+		strcat(buf, params[cnt]);
+		strcat(buf, "\"");
 	}
 
 	int len = 0;
 	char *jsonResponse = 0;
-	len = asprintf(&jsonResponse, "Event \"%s\", origin: \"%s\", params: %d [%s]", event, origin ? origin : "NULL", cnt, buf);
+	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", sessionToken, event, origin ? origin : "NULL", buf);
 
 	if (jsonResponse) {
 		LSError lserror;
 		LSErrorInit(&lserror);
-		wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, (char*)irc_get_ctx(session));
+		wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
 		LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
 		free(jsonResponse);
@@ -142,10 +145,10 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	g_hash_table_insert(wIRCd_clients, (gpointer)sessionToken, (gpointer)client);
 
-    if (pthread_create(&client->thread, NULL, client_run, (void*)sessionToken)) {
-    	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
-    	retVal = false;
-    }
+	if (pthread_create(&client->thread, NULL, client_run, (void*)sessionToken)) {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
+		retVal = false;
+	}
 
 	LSErrorFree(&lserror);
 
@@ -153,7 +156,7 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 }
 
-bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
+bool process_message_style_command(LSHandle* lshandle, LSMessage *message, int type) {
 
 	bool retVal = true;
 
@@ -175,7 +178,12 @@ bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
 	if (client) {
-		int retVal = irc_cmd_msg(client->session, nch, text);
+		int retVal = -1;
+		switch (type) {
+		case 1: retVal = irc_cmd_msg(client->session, nch, text); break;
+		case 2: retVal = irc_cmd_me(client->session, nch, text); break;
+		case 3: retVal = irc_cmd_notice(client->session, nch, text); break;
+		}
 		char *jsonResponse = 0;
 		int len = 0;
 		len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
@@ -193,4 +201,16 @@ bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	return retVal;
 
+}
+
+bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, 1);
+}
+
+bool client_cmd_me(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, 2);
+}
+
+bool client_cmd_notice(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, 3);
 }

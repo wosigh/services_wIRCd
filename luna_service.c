@@ -30,6 +30,8 @@ GMainLoop		*loop				= NULL;
 LSMethod lsmethods[] = {
 		{"client_connect",client_connect},
 		{"client_cmd_msg",client_cmd_msg},
+		{"client_cmd_me",client_cmd_me},
+		{"client_cmd_notice",client_cmd_notice},
 		{0,0}
 };
 
