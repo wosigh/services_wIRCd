@@ -34,7 +34,9 @@ typedef enum {
 	topic_,
 	channel_mode_,
 	kick_,
-	nick_
+	nick_,
+	quit_,
+	whois_,
 } irc_cmd;
 
 void *client_run(void *sessionToken) {
@@ -247,6 +249,8 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case channel_mode_: retVal = irc_cmd_channel_mode(client->session, channel, mode); break;
 		case kick_: retVal = irc_cmd_kick(client->session, nick, channel, reason); break;
 		case nick_: retVal = irc_cmd_nick(client->session, nick); break;
+		case quit_: retVal = irc_cmd_quit(client->session, reason); break;
+		case whois_: retVal = irc_cmd_whois(client->session, nick); break;
 		}
 		char *jsonResponse = 0;
 		int len = 0;
@@ -314,4 +318,12 @@ bool client_cmd_kick(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 bool client_cmd_nick(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, nick_);
+}
+
+bool client_cmd_quit(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, quit_);
+}
+
+bool client_cmd_whois(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, whois_);
 }
