@@ -17,5 +17,10 @@
  =============================================================================*/
 
 int main(int argc, char *argv[]) {
+
+    if (luna_service_initialize())
+            luna_service_start();
+
 	return 0;
+
 }

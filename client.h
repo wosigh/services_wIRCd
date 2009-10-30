@@ -19,11 +19,14 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
+#include <pthread.h>
+
 #include <lunaservice.h>
 #include <libircclient.h>
 
 GHashTable *client_sessions;
 
 bool client_create_session(LSHandle* lshandle, LSMessage *message, void *ctx);
+bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx);
 
 #endif /* CLIENT_H_ */

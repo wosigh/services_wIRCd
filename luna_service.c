@@ -30,7 +30,7 @@ LSHandle		*pub_serviceHandle	= NULL;
 LSHandle		*priv_serviceHandle	= NULL;
 
 LSMethod lsmethods[] = {
-		{"client_create_session",client_create_session},
+		{"client_connect",client_connect},
 		{0,0}
 };
 
