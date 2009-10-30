@@ -36,7 +36,7 @@ typedef struct {
 	const char 		*realname;
 } wIRCd_client_t;
 
-GHashTable *session_thread_table;
+GHashTable *wIRCd_clients;
 
 irc_callbacks_t	callbacks;
 

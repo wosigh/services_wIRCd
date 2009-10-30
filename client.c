@@ -29,7 +29,7 @@ void *client_run(void *sessionToken) {
 	LSError lserror;
 	LSErrorInit(&lserror);
 
-	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(session_thread_table, (char*)sessionToken);
+	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, (char*)sessionToken);
 
 	client->server = 0;
 	client->port = 6667;
@@ -73,10 +73,18 @@ void *client_run(void *sessionToken) {
 
 	irc_run(client->session);
 
+	LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":0}",&lserror);
+	LSMessageUnref(client->message);
+
 	done:
 
 	if (client->session)
 		irc_destroy_session(client->session);
+
+	g_hash_table_remove(wIRCd_clients, (gconstpointer)sessionToken);
+
+	if (client)
+		free(client);
 
 	LSErrorFree(&lserror);
 
@@ -103,7 +111,7 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 	if (jsonResponse) {
 		LSError lserror;
 		LSErrorInit(&lserror);
-		wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(session_thread_table, (char*)irc_get_ctx(session));
+		wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, (char*)irc_get_ctx(session));
 		LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
 		free(jsonResponse);
@@ -130,7 +138,7 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	const char* sessionToken = LSMessageGetUniqueToken(message)+1;
 
-	g_hash_table_insert(session_thread_table, (gpointer)sessionToken, (gpointer)client);
+	g_hash_table_insert(wIRCd_clients, (gpointer)sessionToken, (gpointer)client);
 
     if (pthread_create(&client->thread, NULL, client_run, (void*)sessionToken)) {
     	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
