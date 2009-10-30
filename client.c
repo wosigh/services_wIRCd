@@ -25,10 +25,61 @@
 bool join = true;
 
 void *client_run(void *sessionToken) {
+
+	LSError lserror;
+	LSErrorInit(&lserror);
+
 	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(session_thread_table, (char*)sessionToken);
-	g_message("Start-Thread");
+
+	client->server = 0;
+	client->port = 6667;
+	client->server_password = 0;
+	client->nick = 0;
+	client->username = 0;
+	client->realname = 0;
+
+	json_t *object = LSMessageGetPayloadJSON(client->message);
+
+	// Basic connection info
+	json_get_string(object, "server", client->server); // Required
+	json_get_int(object, "port", client->port);
+
+	// Server related connection info
+	json_get_string(object, "username", client->username);
+	json_get_string(object, "server_password", client->server_password);
+
+	// Basic user info
+	json_get_string(object, "nick", client->nick); // Required
+	json_get_string(object, "realname", client->realname);
+
+	if (!client->server) {
+		LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);
+		goto done;
+	} else if (!client->nick) {
+		LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Nick missing\"}",&lserror);
+		goto done;
+	}
+
+	client->session = irc_create_session(&callbacks);
+
+	if (!client->session)
+		goto done;
+
+	if (irc_connect(client->session, client->server, client->port,
+			client->server_password, client->nick, client->username, client->realname))
+		goto done;
+
+	irc_set_ctx(client->session,(void*)sessionToken);
+
 	irc_run(client->session);
-	g_message("End-Thread");
+
+	done:
+
+	if (client->session)
+		irc_destroy_session(client->session);
+
+	LSErrorFree(&lserror);
+
 }
 
 void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
@@ -72,62 +123,19 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	LSError lserror;
 	LSErrorInit(&lserror);
 
-	const char *server = 0;
-	unsigned short port = 6667;
-	const char *server_password = 0;
-	const char *nick = 0;
-	const char *username = 0;
-	const char *realname = 0;
-
-	json_t *object = LSMessageGetPayloadJSON(message);
-
-	// Basic connection info
-	json_get_string(object, "server", &server); // Required
-	json_get_int(object, "port", port);
-
-	// Server related connection info
-	json_get_string(object, "username", &username);
-	json_get_string(object, "server_password", &server_password);
-
-	// Basic user info
-	json_get_string(object, "nick", &nick); // Required
-	json_get_string(object, "realname", &realname);
-
-	if (!server) {
-		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);
-		goto done;
-	} else if (!nick) {
-		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Nick missing\"}",&lserror);
-		goto done;
-	}
-
 	LSMessageRef(message);
+
+	wIRCd_client_t *client = malloc(sizeof(wIRCd_client_t));
+	client->message = message;
 
 	const char* sessionToken = LSMessageGetUniqueToken(message)+1;
 
-	wIRCd_client_t *client = malloc(sizeof(wIRCd_client_t));
-	client->session = irc_create_session(&callbacks);
-	client->message = message;
-
-	if (!client->session)
-		goto done;
-
 	g_hash_table_insert(session_thread_table, (gpointer)sessionToken, (gpointer)client);
 
-	if (irc_connect(client->session, server, port, server_password, nick, username, realname))
-		goto done;
-
-	irc_set_ctx(client->session,(void*)sessionToken);
-
-    if (pthread_create(client->thread, NULL, client_run, (void*)sessionToken))
+    if (pthread_create(client->thread, NULL, client_run, (void*)sessionToken)) {
     	LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
-
-	irc_run(client->session);
-
-	done:
-
-	if (client->session)
-		irc_destroy_session(client->session);
+    	retVal = false;
+    }
 
 	LSErrorFree(&lserror);
 

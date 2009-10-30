@@ -26,8 +26,14 @@
 
 typedef struct {
 	irc_session_t	*session;
-	pthread_t		*thread;
+	pthread_t		thread;
 	LSMessage		*message;
+	const char 		*server;
+	unsigned short 	port;
+	const char 		*server_password;
+	const char 		*nick;
+	const char 		*username;
+	const char 		*realname;
 } wIRCd_client_t;
 
 GHashTable *session_thread_table;
