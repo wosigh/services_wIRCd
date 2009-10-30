@@ -1,16 +1,16 @@
 /*
  * Copyright (C) 2004-2009 Georgy Yunaev gyunaev@ulduzsoft.com
  *
- * This example is free, and not covered by LGPL license. There is no 
+ * This example is free, and not covered by LGPL license. There is no
  * restriction applied to their modification, redistribution, using and so on.
- * You can study them, modify them, use them in your own program - either 
+ * You can study them, modify them, use them in your own program - either
  * completely or partially. By using it you may give me some credits in your
  * program, but you don't have to.
  *
  *
  * This example tests most features of libirc. It can join the specific
  * channel, welcoming all the people there, and react on some messages -
- * 'help', 'quit', 'dcc chat', 'dcc send', 'ctcp'. Also it can reply to 
+ * 'help', 'quit', 'dcc chat', 'dcc send', 'ctcp'. Also it can reply to
  * CTCP requests, receive DCC files and accept DCC chats.
  *
  * Features used:
@@ -109,7 +109,7 @@ void event_privmsg (irc_session_t * session, const char * event, const char * or
 {
 	dump_event (session, event, origin, params, count);
 
-	printf ("'%s' said me (%s): %s\n", 
+	printf ("'%s' said me (%s): %s\n",
 		origin ? origin : "someone",
 		params[0], params[1] );
 }
@@ -132,7 +132,7 @@ void dcc_recv_callback (irc_session_t * session, irc_dcc_t id, int status, void 
 			printf ("DCC %d: chat connected\n", id);
 			irc_dcc_msg	(session, id, "Hehe");
 		}
-		else 
+		else
 		{
 			printf ("DCC %d: %s\n", id, data);
 			sprintf (buf, "DCC [%d]: %d", id, count++);
@@ -179,7 +179,7 @@ void event_channel (irc_session_t * session, const char * event, const char * or
 	if ( count != 2 )
 		return;
 
-	printf ("'%s' said in channel %s: %s\n", 
+	printf ("'%s' said in channel %s: %s\n",
 		origin ? origin : "someone",
 		params[0], params[1] );
 
