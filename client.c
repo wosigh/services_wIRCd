@@ -306,3 +306,35 @@ bool process_channel_mgt_style_command(LSHandle* lshandle, LSMessage *message, i
 	return retVal;
 
 }
+
+bool client_cmd_join(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, join_);
+}
+
+bool client_cmd_part(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, part_);
+}
+
+bool client_cmd_invite(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, invite_);
+}
+
+bool client_cmd_names(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, names_);
+}
+
+bool client_cmd_list(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, list_);
+}
+
+bool client_cmd_topic(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, topic_);
+}
+
+bool client_cmd_channel_mode(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, channel_mode_);
+}
+
+bool client_cmd_kick(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_message_style_command(lshandle, message, kick_);
+}

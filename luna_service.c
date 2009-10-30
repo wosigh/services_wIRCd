@@ -28,10 +28,21 @@ const char 		*dbusAddress 		= "us.ryanhope.wIRCd";
 GMainLoop		*loop				= NULL;
 
 LSMethod lsmethods[] = {
+		// Connection subscription
 		{"client_connect",client_connect},
+		// Message methods
 		{"client_cmd_msg",client_cmd_msg},
 		{"client_cmd_me",client_cmd_me},
 		{"client_cmd_notice",client_cmd_notice},
+		// Channel methods
+		{"client_cmd_join",client_cmd_join},
+		{"client_cmd_part",client_cmd_part},
+		{"client_cmd_invite",client_cmd_invite},
+		{"client_cmd_names",client_cmd_names},
+		{"client_cmd_list",client_cmd_list},
+		{"client_cmd_topic",client_cmd_topic},
+		{"client_cmd_channel_mode",client_cmd_channel_mode},
+		{"client_cmd_kick",client_cmd_kick},
 		{0,0}
 };
 
