@@ -103,6 +103,7 @@ void luna_service_start() {
 	callbacks.event_ctcp_rep = dump_event;
 	callbacks.event_ctcp_action = dump_event;
 	callbacks.event_unknown = dump_event;
+	callbacks.event_numeric = event_numeric;
 
 	wIRCd_clients = g_hash_table_new(g_str_hash, g_str_equal);
 	if (wIRCd_clients)

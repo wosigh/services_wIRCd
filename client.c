@@ -140,6 +140,18 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 
 }
 
+void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
+
+	if (event==324)
+		g_message("%s (%s)", params[1], params[2]);
+
+	char buf[24];
+	sprintf(buf, "%d", event);
+
+	dump_event(session, buf, origin, params, count);
+
+}
+
 bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	bool retVal = true;
