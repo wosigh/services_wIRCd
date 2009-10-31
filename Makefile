@@ -4,11 +4,11 @@ INCLUDES	:=	-I. \
 				-I$(CROSS_COMPILE_ROOT)/usr/lib/glib-2.0/include \
 				-I$(CROSS_COMPILE_ROOT)/usr/include/lunaservice \
 				-I$(CROSS_COMPILE_ROOT)/usr/include/mjson \
-				-Ilibircclient-1.3/include
+				-Ilibircclient/include
 LIBS		:= 	-lglib-2.0 -llunaservice
 PROGRAM		:= 	wIRCd
 OBJECTS		:= 	client.o luna_service.o main.o
-ARCHIVES	:=	libircclient-1.3/src/libircclient.a
+ARCHIVES	:=	libircclient/src/libircclient.a
 
 .PHONY		: 	clean-objects clean
 

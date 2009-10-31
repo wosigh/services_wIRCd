@@ -1,0 +1,1595 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3
+END
+LIBIRC_RFC_ERR_CANTKILLSERVER.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_CANTKILLSERVER.3
+END
+LIBIRC_RFC_RPL_TRACEEND.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACEEND.3
+END
+irc_dcc_chat.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_chat.3
+END
+LIBIRC_RFC_ERR_NICKCOLLISION.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NICKCOLLISION.3
+END
+LIBIRC_RFC_ERR_NEEDMOREPARAMS.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NEEDMOREPARAMS.3
+END
+irc_destroy_session.3
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_destroy_session.3
+END
+LIBIRC_RFC_ERR_KEYSET.3
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_KEYSET.3
+END
+LIBIRC_RFC_RPL_MYINFO.3
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_MYINFO.3
+END
+LIBIRC_RFC_RPL_MOTD.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_MOTD.3
+END
+irc_callbacks_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/irc_callbacks_t.3
+END
+LIBIRC_RFC_RPL_WHOISCHANNELS.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WHOISCHANNELS.3
+END
+LIBIRC_RFC_ERR_NONICKNAMEGIVEN.3
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NONICKNAMEGIVEN.3
+END
+LIBIRC_RFC_RPL_LIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LIST.3
+END
+LIBIRC_RFC_RPL_TOPIC.3
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TOPIC.3
+END
+LIBIRC_RFC_ERR_NOORIGIN.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOORIGIN.3
+END
+LIBIRC_RFC_RPL_STATSILINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSILINE.3
+END
+LIBIRC_RFC_RPL_WHOISSERVER.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WHOISSERVER.3
+END
+LIBIRC_RFC_RPL_LINKS.3
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LINKS.3
+END
+irc_connect6.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/irc_connect6.3
+END
+event_topic.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_topic.3
+END
+LIBIRC_RFC_RPL_NOWAWAY.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_NOWAWAY.3
+END
+LIBIRC_RFC_RPL_NAMREPLY.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_NAMREPLY.3
+END
+irc_cmd_ctcp_reply.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_ctcp_reply.3
+END
+event_nick.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_nick.3
+END
+libircclient.h.3
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/libircclient.h.3
+END
+LIBIRC_RFC_RPL_STATSYLINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSYLINE.3
+END
+LIBIRC_RFC_ERR_UNKNOWNMODE.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_UNKNOWNMODE.3
+END
+LIBIRC_RFC_ERR_NOPERMFORHOST.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOPERMFORHOST.3
+END
+LIBIRC_ERR_ACCEPT.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_ACCEPT.3
+END
+LIBIRC_RFC_RPL_TRACEHANDSHAKE.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACEHANDSHAKE.3
+END
+irc_cmd_quit.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_quit.3
+END
+LIBIRC_RFC_RPL_ISON.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ISON.3
+END
+irc_add_select_descriptors.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_add_select_descriptors.3
+END
+LIBIRC_RFC_ERR_NOSUCHCHANNEL.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOSUCHCHANNEL.3
+END
+running.3
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/running.3
+END
+event_kick.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_kick.3
+END
+LIBIRC_RFC_ERR_BADCHANMASK.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_BADCHANMASK.3
+END
+LIBIRC_RFC_RPL_WHOISUSER.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WHOISUSER.3
+END
+LIBIRC_RFC_ERR_NOOPERHOST.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOOPERHOST.3
+END
+LIBIRC_RFC_ERR_NOMOTD.3
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOMOTD.3
+END
+common.3
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/common.3
+END
+LIBIRC_ERR_NOTFOUND.3
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_NOTFOUND.3
+END
+irc_get_ctx.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_get_ctx.3
+END
+options.3
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/options.3
+END
+LIBIRC_RFC_ERR_UNAVAILRESOURCE.3
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_UNAVAILRESOURCE.3
+END
+LIBIRC_RFC_RPL_LISTEND.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LISTEND.3
+END
+irc_cmd_notice.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_notice.3
+END
+irc_create_session.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_create_session.3
+END
+irc_set_ctx.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_set_ctx.3
+END
+irc_dcc_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_t.3
+END
+LIBIRC_RFC_ERR_NOTOPLEVEL.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOTOPLEVEL.3
+END
+LIBIRC_RFC_RPL_STATSLLINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSLLINE.3
+END
+LIBIRC_RFC_RPL_ENDOFWHOWAS.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFWHOWAS.3
+END
+LIBIRC_RFC_RPL_EXCEPTLIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_EXCEPTLIST.3
+END
+LIBIRC_RFC_RPL_VERSION.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_VERSION.3
+END
+irc_get_version.3
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_get_version.3
+END
+LIBIRC_RFC_ERR_NOTEXTTOSEND.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOTEXTTOSEND.3
+END
+LIBIRC_RFC_RPL_YOURHOST.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_YOURHOST.3
+END
+LIBIRC_RFC_RPL_BANLIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_BANLIST.3
+END
+event_privmsg.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_privmsg.3
+END
+irc_cmd_channel_mode.3
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_channel_mode.3
+END
+LIBIRC_RFC_ERR_RESTRICTED.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_RESTRICTED.3
+END
+irc_dcc_destroy.3
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_destroy.3
+END
+LIBIRC_RFC_RPL_WHOISOPERATOR.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WHOISOPERATOR.3
+END
+LIBIRC_RFC_RPL_UNIQOPIS.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_UNIQOPIS.3
+END
+LIBIRC_RFC_RPL_ENDOFINFO.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFINFO.3
+END
+irc_session_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_session_t.3
+END
+LIBIRC_RFC_ERR_WASNOSUCHNICK.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_WASNOSUCHNICK.3
+END
+LIBIRC_RFC_ERR_NOSUCHSERVICE.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOSUCHSERVICE.3
+END
+LIBIRC_RFC_ERR_PASSWDMISMATCH.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_PASSWDMISMATCH.3
+END
+LIBIRC_RFC_RPL_TRACECLASS.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACECLASS.3
+END
+LIBIRC_RFC_ERR_USERSDISABLED.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_USERSDISABLED.3
+END
+irc_errno.3
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_errno.3
+END
+LIBIRC_RFC_RPL_WHOISIDLE.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WHOISIDLE.3
+END
+LIBIRC_RFC_RPL_INFO.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_INFO.3
+END
+dccstuff.3
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/dccstuff.3
+END
+LIBIRC_OPTION_DEBUG.3
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_OPTION_DEBUG.3
+END
+LIBIRC_RFC_RPL_TRACEOPERATOR.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACEOPERATOR.3
+END
+LIBIRC_RFC_RPL_ENDOFSTATS.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFSTATS.3
+END
+libirc_doc_faq.h.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/libirc_doc_faq.h.3
+END
+LIBIRC_RFC_RPL_NOTOPIC.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_NOTOPIC.3
+END
+contexts.3
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/contexts.3
+END
+irc_event_callback_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_event_callback_t.3
+END
+LIBIRC_ERR_NOIPV6.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/LIBIRC_ERR_NOIPV6.3
+END
+irc_target_get_host.3
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_target_get_host.3
+END
+LIBIRC_RFC_RPL_STATSOLINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSOLINE.3
+END
+irc_event_dcc_send_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_event_dcc_send_t.3
+END
+event_quit.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_quit.3
+END
+event_connect.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_connect.3
+END
+LIBIRC_RFC_RPL_TRACELOG.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACELOG.3
+END
+LIBIRC_RFC_RPL_AWAY.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_AWAY.3
+END
+event_unknown.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_unknown.3
+END
+irc_cmd_user_mode.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_user_mode.3
+END
+LIBIRC_RFC_RPL_CHANNELMODEIS.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_CHANNELMODEIS.3
+END
+LIBIRC_ERR_RESOLV.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_RESOLV.3
+END
+LIBIRC_RFC_RPL_BOUNCE.3
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_BOUNCE.3
+END
+LIBIRC_RFC_RPL_ENDOFUSERS.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFUSERS.3
+END
+irc_event_dcc_chat_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_event_dcc_chat_t.3
+END
+LIBIRC_RFC_ERR_UMODEUNKNOWNFLAG.3
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_UMODEUNKNOWNFLAG.3
+END
+libirc_events.h.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/libirc_events.h.3
+END
+irc_cmd_ctcp_request.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_ctcp_request.3
+END
+LIBIRC_ERR_TIMEOUT.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_TIMEOUT.3
+END
+LIBIRC_RFC_RPL_INVITING.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_INVITING.3
+END
+LIBIRC_RFC_RPL_YOUREOPER.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_YOUREOPER.3
+END
+LIBIRC_RFC_RPL_WELCOME.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WELCOME.3
+END
+irc_color_convert_to_mirc.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/irc_color_convert_to_mirc.3
+END
+event_ctcp_action.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/event_ctcp_action.3
+END
+LIBIRC_RFC_ERR_TOOMANYCHANNELS.3
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_TOOMANYCHANNELS.3
+END
+ctcp.3
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/ctcp.3
+END
+irc_is_connected.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/27/trunk/libircclient/doc/man/man3/irc_is_connected.3
+END
+irc_cmd_list.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_list.3
+END
+LIBIRC_RFC_RPL_ADMINEMAIL.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ADMINEMAIL.3
+END
+event_dcc_chat_req.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_dcc_chat_req.3
+END
+LIBIRC_RFC_ERR_WILDTOPLEVEL.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_WILDTOPLEVEL.3
+END
+LIBIRC_RFC_RPL_CREATED.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_CREATED.3
+END
+LIBIRC_RFC_RPL_ENDOFBANLIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFBANLIST.3
+END
+LIBIRC_RFC_ERR_NORECIPIENT.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NORECIPIENT.3
+END
+LIBIRC_RFC_RPL_TRACELINK.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACELINK.3
+END
+LIBIRC_RFC_RPL_STATSCOMMANDS.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSCOMMANDS.3
+END
+errors.3
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/errors.3
+END
+irc_cmd_invite.3
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_invite.3
+END
+irc_cmd_part.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_part.3
+END
+LIBIRC_RFC_ERR_NOSUCHNICK.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOSUCHNICK.3
+END
+LIBIRC_RFC_ERR_NOPRIVILEGES.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOPRIVILEGES.3
+END
+LIBIRC_ERR_NODCCSEND.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_NODCCSEND.3
+END
+LIBIRC_RFC_RPL_UNAWAY.3
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_UNAWAY.3
+END
+LIBIRC_RFC_RPL_ENDOFWHOIS.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFWHOIS.3
+END
+LIBIRC_RFC_RPL_ENDOFWHO.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFWHO.3
+END
+LIBIRC_ERR_OK.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_OK.3
+END
+LIBIRC_RFC_RPL_LUSERUNKNOWN.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LUSERUNKNOWN.3
+END
+errorcodes.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/errorcodes.3
+END
+ircmd_ch.3
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/ircmd_ch.3
+END
+irc_eventcode_callback_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_eventcode_callback_t.3
+END
+irc_cmd_whois.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_whois.3
+END
+LIBIRC_RFC_RPL_TRACESERVICE.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACESERVICE.3
+END
+LIBIRC_RFC_ERR_NOSUCHSERVER.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOSUCHSERVER.3
+END
+irc_strerror.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_strerror.3
+END
+LIBIRC_RFC_RPL_YOURESERVICE.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_YOURESERVICE.3
+END
+LIBIRC_RFC_ERR_NICKNAMEINUSE.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NICKNAMEINUSE.3
+END
+LIBIRC_RFC_RPL_TRACESERVER.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACESERVER.3
+END
+event_notice.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_notice.3
+END
+LIBIRC_RFC_RPL_LISTSTART.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LISTSTART.3
+END
+irc_dcc_callback_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_callback_t.3
+END
+LIBIRC_RFC_RPL_INVITELIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_INVITELIST.3
+END
+irc_target_get_nick.3
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_target_get_nick.3
+END
+initclose.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/initclose.3
+END
+LIBIRC_RFC_RPL_TIME.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TIME.3
+END
+LIBIRC_RFC_ERR_UNIQOPPRIVSNEEDED.3
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_UNIQOPPRIVSNEEDED.3
+END
+irc_process_select_descriptors.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_process_select_descriptors.3
+END
+irc_dcc_msg.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_msg.3
+END
+LIBIRC_RFC_ERR_SUMMONDISABLED.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_SUMMONDISABLED.3
+END
+LIBIRC_ERR_OPENFILE.3
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_OPENFILE.3
+END
+irc_dcc_sendfile.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_sendfile.3
+END
+colors.3
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/colors.3
+END
+event_numeric.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_numeric.3
+END
+LIBIRC_RFC_RPL_WHOREPLY.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WHOREPLY.3
+END
+LIBIRC_ERR_CLOSED.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_CLOSED.3
+END
+ircmd_oth.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/ircmd_oth.3
+END
+LIBIRC_RFC_ERR_CANNOTSENDTOCHAN.3
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_CANNOTSENDTOCHAN.3
+END
+LIBIRC_RFC_ERR_YOUREBANNEDCREEP.3
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_YOUREBANNEDCREEP.3
+END
+LIBIRC_RFC_RPL_STATSLINKINFO.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSLINKINFO.3
+END
+LIBIRC_RFC_ERR_NOCHANMODES.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOCHANMODES.3
+END
+LIBIRC_RFC_ERR_NOADMININFO.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOADMININFO.3
+END
+LIBIRC_RFC_RPL_LUSERCHANNELS.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LUSERCHANNELS.3
+END
+LIBIRC_RFC_ERR_TOOMANYTARGETS.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_TOOMANYTARGETS.3
+END
+LIBIRC_ERR_READ.3
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_READ.3
+END
+event_dcc_send_req.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_dcc_send_req.3
+END
+LIBIRC_RFC_RPL_ENDOFNAMES.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFNAMES.3
+END
+LIBIRC_RFC_ERR_BADCHANNELKEY.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_BADCHANNELKEY.3
+END
+libirc_doc.h.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/libirc_doc.h.3
+END
+irc_cmd_join.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_join.3
+END
+irc_option_set.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_option_set.3
+END
+LIBIRC_RFC_ERR_INVITEONLYCHAN.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_INVITEONLYCHAN.3
+END
+LIBIRC_RFC_ERR_ALREADYREGISTRED.3
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_ALREADYREGISTRED.3
+END
+LIBIRC_ERR_MAX.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_MAX.3
+END
+irc_cmd_names.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_names.3
+END
+LIBIRC_RFC_ERR_BANNEDFROMCHAN.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_BANNEDFROMCHAN.3
+END
+LIBIRC_RFC_RPL_ENDOFEXCEPTLIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFEXCEPTLIST.3
+END
+LIBIRC_RFC_RPL_USERS.3
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_USERS.3
+END
+LIBIRC_RFC_RPL_TRACECONNECTING.3
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACECONNECTING.3
+END
+LIBIRC_RFC_ERR_NOTREGISTERED.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOTREGISTERED.3
+END
+libirc_options.h.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/libirc_options.h.3
+END
+nnparse.3
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/nnparse.3
+END
+rfcnumbers.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/rfcnumbers.3
+END
+event_part.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_part.3
+END
+libirc_rfcnumeric.h.3
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/libirc_rfcnumeric.h.3
+END
+irc_color_convert_from_mirc.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/irc_color_convert_from_mirc.3
+END
+irc_dcc_decline.3
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_decline.3
+END
+LIBIRC_RFC_RPL_STATSHLINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSHLINE.3
+END
+LIBIRC_RFC_RPL_LUSEROP.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LUSEROP.3
+END
+event_mode.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_mode.3
+END
+event_ctcp_rep.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_ctcp_rep.3
+END
+conndisc.3
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/conndisc.3
+END
+ircmd_msg.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/ircmd_msg.3
+END
+LIBIRC_RFC_RPL_TRACENEWTYPE.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACENEWTYPE.3
+END
+LIBIRC_RFC_RPL_SERVLIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_SERVLIST.3
+END
+LIBIRC_ERR_NOMEM.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_NOMEM.3
+END
+LIBIRC_RFC_RPL_TRYAGAIN.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRYAGAIN.3
+END
+LIBIRC_RFC_RPL_TRACEUNKNOWN.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACEUNKNOWN.3
+END
+event_channel_notice.3
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/event_channel_notice.3
+END
+irc_dcc_session_t.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_session_t.3
+END
+LIBIRC_RFC_ERR_NOTONCHANNEL.3
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOTONCHANNEL.3
+END
+LIBIRC_ERR_CONNECT.3
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_CONNECT.3
+END
+irc_connect.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_connect.3
+END
+LIBIRC_RFC_RPL_ENDOFLINKS.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFLINKS.3
+END
+irc_color_strip_from_mirc.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/irc_color_strip_from_mirc.3
+END
+LIBIRC_RFC_ERR_NOLOGIN.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_NOLOGIN.3
+END
+irc_cmd_topic.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_topic.3
+END
+LIBIRC_RFC_ERR_ERRONEUSNICKNAME.3
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_ERRONEUSNICKNAME.3
+END
+event_invite.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_invite.3
+END
+LIBIRC_RFC_RPL_ADMINLOC1.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ADMINLOC1.3
+END
+LIBIRC_RFC_RPL_STATSCLINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSCLINE.3
+END
+irc_dcc_accept.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_dcc_accept.3
+END
+LIBIRC_RFC_ERR_BANLISTFULL.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_BANLISTFULL.3
+END
+irc_cmd_msg.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_msg.3
+END
+LIBIRC_RFC_RPL_SUMMONING.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_SUMMONING.3
+END
+LIBIRC_RFC_ERR_YOUWILLBEBANNED.3
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_YOUWILLBEBANNED.3
+END
+LIBIRC_RFC_RPL_STATSKLINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSKLINE.3
+END
+LIBIRC_RFC_ERR_UNKNOWNCOMMAND.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_UNKNOWNCOMMAND.3
+END
+libirc_errors.h.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/libirc_errors.h.3
+END
+LIBIRC_RFC_ERR_USERONCHANNEL.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_USERONCHANNEL.3
+END
+LIBIRC_RFC_RPL_SERVLISTEND.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_SERVLISTEND.3
+END
+irc_send_raw.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_send_raw.3
+END
+event_join.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_join.3
+END
+LIBIRC_RFC_RPL_UMODEIS.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_UMODEIS.3
+END
+sendcmds.3
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/libircclient/!svn/ver/25/trunk/libircclient/doc/man/man3/sendcmds.3
+END
+event_ctcp_req.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_ctcp_req.3
+END
+LIBIRC_RFC_RPL_WHOWASUSER.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_WHOWASUSER.3
+END
+irc_cmd_nick.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/irc_cmd_nick.3
+END
+LIBIRC_RFC_ERR_USERNOTINCHANNEL.3
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_USERNOTINCHANNEL.3
+END
+event_umode.3
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_umode.3
+END
+irc_disconnect.3
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_disconnect.3
+END
+LIBIRC_ERR_WRITE.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_WRITE.3
+END
+LIBIRC_ERR_TERMINATED.3
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_TERMINATED.3
+END
+LIBIRC_RFC_ERR_USERSDONTMATCH.3
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_USERSDONTMATCH.3
+END
+LIBIRC_RFC_RPL_NOUSERS.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_NOUSERS.3
+END
+irc_run.3
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_run.3
+END
+irc_cmd_kick.3
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_kick.3
+END
+LIBIRC_RFC_RPL_ADMINLOC2.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ADMINLOC2.3
+END
+pagefaq.3
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/pagefaq.3
+END
+LIBIRC_ERR_INVAL.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_INVAL.3
+END
+LIBIRC_OPTION_STRIPNICKS.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_OPTION_STRIPNICKS.3
+END
+LIBIRC_RFC_RPL_ADMINME.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ADMINME.3
+END
+LIBIRC_RFC_RPL_USERHOST.3
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_USERHOST.3
+END
+LIBIRC_RFC_ERR_CHANOPRIVSNEEDED.3
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_CHANOPRIVSNEEDED.3
+END
+LIBIRC_RFC_RPL_LUSERME.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LUSERME.3
+END
+LIBIRC_RFC_ERR_CHANNELISFULL.3
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_CHANNELISFULL.3
+END
+LIBIRC_RFC_ERR_FILEERROR.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_FILEERROR.3
+END
+LIBIRC_RFC_RPL_STATSNLINE.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSNLINE.3
+END
+irc_cmd_me.3
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_cmd_me.3
+END
+irc_event_ctcp_internal.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_event_ctcp_internal.3
+END
+LIBIRC_ERR_SOCKET.3
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_SOCKET.3
+END
+LIBIRC_RFC_RPL_LUSERCLIENT.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_LUSERCLIENT.3
+END
+LIBIRC_RFC_RPL_TRACEUSER.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_TRACEUSER.3
+END
+LIBIRC_RFC_ERR_BADMASK.3
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_ERR_BADMASK.3
+END
+LIBIRC_RFC_RPL_ENDOFINVITELIST.3
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFINVITELIST.3
+END
+LIBIRC_RFC_RPL_REHASHING.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_REHASHING.3
+END
+events.3
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/libircclient/!svn/ver/83/trunk/libircclient/doc/man/man3/events.3
+END
+irc_option_reset.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/irc_option_reset.3
+END
+event_channel.3
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/event_channel.3
+END
+LIBIRC_RFC_RPL_USERSSTART.3
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_USERSSTART.3
+END
+LIBIRC_RFC_RPL_ENDOFMOTD.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_ENDOFMOTD.3
+END
+LIBIRC_ERR_STATE.3
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/libircclient/!svn/ver/2/trunk/libircclient/doc/man/man3/LIBIRC_ERR_STATE.3
+END
+LIBIRC_RFC_RPL_MOTDSTART.3
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_MOTDSTART.3
+END
+LIBIRC_RFC_RPL_STATSUPTIME.3
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/libircclient/!svn/ver/41/trunk/libircclient/doc/man/man3/LIBIRC_RFC_RPL_STATSUPTIME.3
+END

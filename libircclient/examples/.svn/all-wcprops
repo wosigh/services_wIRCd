@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/examples
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/libircclient/!svn/ver/42/trunk/libircclient/examples/Makefile.in
+END
+colors.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/examples/colors.cpp
+END
+spammer.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/examples/spammer.c
+END
+ircftp.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/examples/ircftp.cpp
+END
+censor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/examples/censor.cpp
+END
+irctest.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/examples/irctest.c
+END

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/libircclient/!svn/ver/84/trunk/libircclient/src
+END
+libircclient.def
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svnroot/libircclient/!svn/ver/78/trunk/libircclient/src/libircclient.def
+END
+utils.c
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/src/utils.c
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/libircclient/!svn/ver/84/trunk/libircclient/src/Makefile.in
+END
+colors.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/src/colors.c
+END
+libircclient.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svnroot/libircclient/!svn/ver/82/trunk/libircclient/src/libircclient.c
+END
+portable.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svnroot/libircclient/!svn/ver/82/trunk/libircclient/src/portable.c
+END
+dcc.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/src/dcc.c
+END
+sockets.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/src/sockets.c
+END
+errors.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/libircclient/!svn/ver/73/trunk/libircclient/src/errors.c
+END
