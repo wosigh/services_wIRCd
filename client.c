@@ -17,6 +17,7 @@
  =============================================================================*/
 
 #include <stdlib.h>
+#include <string.h>
 #include <pthread.h>
 
 #include "luna_service.h"
@@ -190,7 +191,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 
 	char *sessionToken = 0;
 	char *nch = 0;
-	char *text = 0;
+	char *txt = 0;
 	char *channel = 0;
 	char *key = 0;
 	char *nick = 0;
@@ -200,13 +201,43 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 
 	json_get_string(object, "sessionToken", &sessionToken);
 	json_get_string(object, "nch", &nch);
-	json_get_string(object, "text", &text);
+	json_get_string(object, "text", &txt);
 	json_get_string(object, "channel", &channel);
 	json_get_string(object, "key", &key);
 	json_get_string(object, "nick", &nick);
 	json_get_string(object, "topic", &topic);
 	json_get_string(object, "reason", &reason);
 	json_get_string(object, "mode", &mode);
+
+	int len = 0;
+	if (txt)
+		len = strlen(txt);
+
+	char text[len];
+	text[0] = '\0';
+
+	char tmp;
+	int i = 0;
+	int c =0;
+	if (txt) {
+		if (strchr(txt,'"')==NULL) {
+			strcat(text,txt);
+		} else {
+			while (txt[c]) {
+				if (txt[c] != '\\') {
+					text[i] = txt[c];
+					i++;
+					c++;
+				} else {
+					if (txt[c+1] == '"') {
+						text[i] = txt[c+1];
+						i++;
+						c = c+2;
+					}
+				}
+			}
+		}
+	}
 
 	if (!sessionToken)
 		goto done;
