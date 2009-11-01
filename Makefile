@@ -6,7 +6,7 @@ INCLUDES	:=	-I. \
 				-I$(CROSS_COMPILE_ROOT)/usr/include/mjson \
 				-Ilibircclient/include
 LIBS		:= 	-lglib-2.0 -llunaservice
-PROGRAM		:= 	wIRCd
+PROGRAM		:= 	us.ryanhope.wircd
 OBJECTS		:= 	client.o luna_service.o main.o
 ARCHIVES	:=	libircclient/src/libircclient.a
 

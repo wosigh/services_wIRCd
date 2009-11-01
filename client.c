@@ -43,8 +43,6 @@ typedef enum {
 
 void *client_run(void *sessionToken) {
 
-	g_message("sessionToken : %s", (char*)sessionToken);
-
 	LSError lserror;
 	LSErrorInit(&lserror);
 
@@ -111,9 +109,6 @@ void *client_run(void *sessionToken) {
 
 void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
 
-	if (strcmp(event,"ACTION")==0 || strcmp(event,"NOTICE")==0)
-		g_message("%s",event);
-
 	char *sessionToken = (char*)irc_get_ctx(session);
 
 	char buf[1024];
@@ -155,9 +150,6 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 }
 
 void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
-
-	if (event==324)
-		g_message("%s (%s)", params[1], params[2]);
 
 	char buf[24];
 	sprintf(buf, "%d", event);
