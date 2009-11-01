@@ -224,30 +224,17 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		len = strlen(txt);
 
 	char text[len];
-	text[0] = '\0';
 
-	char tmp;
 	int i = 0;
-	int c =0;
-	if (txt) {
-		if (strchr(txt,'"')==NULL) {
-			strcat(text,txt);
-		} else {
-			while (txt[c]) {
-				if (txt[c] != '\\') {
-					text[i] = txt[c];
-					i++;
-					c++;
-				} else {
-					if (txt[c+1] == '"') {
-						text[i] = txt[c+1];
-						i++;
-						c = c+2;
-					}
-				}
-			}
+	int c = 0;
+	while(txt && txt[c]) {
+		if (txt[c] == '\\' && txt[c+1] == '"') {
+			c++;
 		}
+		text[i++] = txt[c++];
 	}
+
+	text[i] = '\0';
 
 	if (!sessionToken)
 		goto done;
