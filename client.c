@@ -115,16 +115,26 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 
 	char buf[1024];
 	int cnt;
-
-	buf[0] = '\0';
+	int i;
+	int j = 0;
 
 	for (cnt = 0; cnt < count; cnt++) {
 		if (cnt)
-			strcat(buf, ",");
-		strcat(buf, "\"");
-		strcat(buf, params[cnt]);
-		strcat(buf, "\"");
+			buf[j++]=',';
+
+		buf[j++]='"';
+
+		for (i = 0; i < strlen(params[cnt]); i++) {
+			if (params[cnt][i] == '"')
+				buf[j++] = '\\';
+
+			buf[j++] = params[cnt][i];
+		}
+
+		buf[j++]='"';
 	}
+
+	buf[j]='\0';
 
 	int len = 0;
 	char *jsonResponse = 0;
