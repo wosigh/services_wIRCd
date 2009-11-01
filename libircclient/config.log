@@ -475,6 +475,7 @@ on Redman
 config.status:744: creating examples/Makefile
 config.status:744: creating src/Makefile
 config.status:744: creating include/config.h
+config.status:955: include/config.h is unchanged
 
 ## ---------------- ##
 ## Cache variables. ##

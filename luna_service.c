@@ -98,6 +98,7 @@ void luna_service_start() {
 	callbacks.event_channel = dump_event;
 	callbacks.event_privmsg = dump_event;
 	callbacks.event_notice = dump_event;
+	callbacks.event_channel_notice = dump_event;
 	callbacks.event_invite = dump_event;
 	callbacks.event_ctcp_req = dump_event;
 	callbacks.event_ctcp_rep = dump_event;

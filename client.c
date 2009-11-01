@@ -111,6 +111,9 @@ void *client_run(void *sessionToken) {
 
 void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
 
+	if (strcmp(event,"ACTION")==0 || strcmp(event,"NOTICE")==0)
+		g_message("%s",event);
+
 	char *sessionToken = (char*)irc_get_ctx(session);
 
 	char buf[1024];
