@@ -49,7 +49,7 @@ void *client_run(void *sessionToken) {
 	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, (char*)sessionToken);
 
 	client->server = 0;
-	client->port = 6667;
+	client->port = 0;
 	client->server_password = 0;
 	client->nick = 0;
 	client->username = 0;
@@ -59,7 +59,7 @@ void *client_run(void *sessionToken) {
 
 	// Basic connection info
 	json_get_string(object, "server", &client->server); // Required
-	json_get_int(object, "port", client->port);
+	json_get_string(object, "port", &client->port);
 
 	// Server related connection info
 	json_get_string(object, "username", &client->username);
@@ -82,16 +82,32 @@ void *client_run(void *sessionToken) {
 	if (!client->session)
 		goto done;
 
-	if (irc_connect(client->session, client->server, client->port,
-			client->server_password, client->nick, client->username, client->realname))
-		goto done;
+	int port = atoi(client->port);
+	if (port<1)
+		port = 6667;
+	int c = irc_connect(client->session, client->server, (unsigned short int)port,
+			client->server_password, client->nick, client->username, client->realname);
 
-	irc_set_ctx(client->session,(void*)sessionToken);
+	if (c==0) {
 
-	irc_run(client->session);
+		irc_set_ctx(client->session,(void*)sessionToken);
 
-	LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":0}",&lserror);
-	LSMessageUnref(client->message);
+		irc_run(client->session);
+
+		LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":0}",&lserror);
+		LSMessageUnref(client->message);
+
+	} else {
+		int len = 0;
+		char *jsonResponse = 0;
+		len = asprintf(&jsonResponse,"{\"returnValue\":%d,\"errorText\":\"%s\"}",c,irc_strerror(c));
+		if (jsonResponse) {
+			LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
+			free(jsonResponse);
+		} else {
+			LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Error getting error message\"}",&lserror);
+		}
+	}
 
 	done:
 
