@@ -1,0 +1,9 @@
+Package: us.ryanhope.wircd
+Version: 0.0.1
+Architecture: armv7
+Maintainer: Ryan Hope <rmh3093@gmail.com>
+Description: wIRCd - WebOS IRC Daemon
+Section: Service - Luna 
+Priority: optional
+Depends:
+Source: git://webos-internals.org/tmp/wIRCd.git
