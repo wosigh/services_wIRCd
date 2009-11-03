@@ -34,6 +34,7 @@ typedef struct {
 	const char 		*nick;
 	const char 		*username;
 	const char 		*realname;
+	int				estabilshed;
 } wIRCd_client_t;
 
 GHashTable *wIRCd_clients;

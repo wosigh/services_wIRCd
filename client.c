@@ -54,6 +54,7 @@ void *client_run(void *sessionToken) {
 	client->nick = 0;
 	client->username = 0;
 	client->realname = 0;
+	client->estabilshed = 0;
 
 	json_t *object = LSMessageGetPayloadJSON(client->message);
 
@@ -77,37 +78,39 @@ void *client_run(void *sessionToken) {
 		goto done;
 	}
 
-	client->session = irc_create_session(&callbacks);
-
-	if (!client->session)
-		goto done;
-
 	int port = atoi(client->port);
 	if (port<1)
 		port = 6667;
-	int c = irc_connect(client->session, client->server, (unsigned short int)port,
-			client->server_password, client->nick, client->username, client->realname);
 
-	if (c==0) {
+	int retry = 0;
+	int max_retries = 10;
 
+	while (true && retry<=max_retries) {
+
+		client->session = irc_create_session(&callbacks);
+		if (!client->session) {
+			LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
+			goto done;
+		}
+
+		int c = irc_connect(client->session, client->server, (unsigned short int)port,
+				client->server_password, client->nick, client->username, client->realname);
 		irc_set_ctx(client->session,(void*)sessionToken);
-
 		irc_run(client->session);
 
-		LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":0}",&lserror);
-		LSMessageUnref(client->message);
-
-	} else {
-		int len = 0;
-		char *jsonResponse = 0;
-		len = asprintf(&jsonResponse,"{\"returnValue\":%d,\"errorText\":\"%s\"}",c,irc_strerror(c));
-		if (jsonResponse) {
-			LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
-			free(jsonResponse);
+		if (client->estabilshed) {
+			break;
 		} else {
-			LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Error getting error message\"}",&lserror);
+			irc_destroy_session(client->session);
+			client->session = 0;
+			retry++;
+			g_message("Retry %d", retry);
 		}
+
 	}
+
+	LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":0}",&lserror);
+	LSMessageUnref(client->message);
 
 	done:
 
@@ -126,6 +129,9 @@ void *client_run(void *sessionToken) {
 void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
 
 	char *sessionToken = (char*)irc_get_ctx(session);
+	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
+
+	client->estabilshed = 1;
 
 	char buf[1024];
 	int cnt;
@@ -157,7 +163,6 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 	if (jsonResponse) {
 		LSError lserror;
 		LSErrorInit(&lserror);
-		wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
 		LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
 		free(jsonResponse);
