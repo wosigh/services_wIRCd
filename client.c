@@ -90,8 +90,6 @@ void *client_run(void *sessionToken) {
 
 	if (c==0) {
 
-		sleep(1);
-
 		irc_set_ctx(client->session,(void*)sessionToken);
 
 		irc_run(client->session);
