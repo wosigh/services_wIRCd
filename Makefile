@@ -1,3 +1,5 @@
+VERSION		:=	"0.0.1"
+
 CC			:=	$(CROSS_COMPILE)gcc
 INCLUDES	:=	-I. \
 				-I$(CROSS_COMPILE_ROOT)/usr/include/glib-2.0 \
@@ -20,7 +22,7 @@ $(PROGRAM): $(OBJECTS)
 	$(CC) $(OBJECTS) $(ARCHIVES) -o $(PROGRAM) $(INCLUDES) $(LIBS)
 
 $(OBJECTS): %.o: %.c
-	$(CC) -c $<  -o $@ $(INCLUDES) $(LIBS)
+	$(CC) -DVERSION=\"$(VERSION)\" -c $<  -o $@ $(INCLUDES) $(LIBS)
 	
 clean-objects:
 	rm -rf $(OBJECTS)

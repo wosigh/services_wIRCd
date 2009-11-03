@@ -17,11 +17,9 @@
  =============================================================================*/
 
 #include <string.h>
-
 #include <glib.h>
 
-#include "luna_service.h"
-#include "client.h"
+#include "wIRCd.h"
 
 const char 		*dbusAddress 		= "us.ryanhope.wIRCd";
 
