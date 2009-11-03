@@ -348,12 +348,8 @@ int irc_is_connected (irc_session_t * session)
 
 int irc_run (irc_session_t * session)
 {
-	printf("\n*******************************\n");
-	printf("run session %p\n", session);
-	printf("*******************************\n");
 	if ( session->state != LIBIRC_STATE_CONNECTING )
 	{
-		printf("Not connecting wtf\n");
 		session->lasterror = LIBIRC_ERR_STATE;
 		return 1;
 	}
@@ -375,7 +371,6 @@ int irc_run (irc_session_t * session)
 
 		if ( select (maxfd + 1, &in_set, &out_set, 0, &tv) < 0 )
 		{
-			printf("select return < 0 \n");
 			if ( socket_error() == EINTR )
 				continue;
 
@@ -384,11 +379,7 @@ int irc_run (irc_session_t * session)
 		}
 
 		if ( irc_process_select_descriptors (session, &in_set, &out_set) )
-		{
-			printf("process select failed\n");
-		  printf("add select descriptors max %d\n", maxfd);
 			return 1;
-		}
 	}
 
 	return 0;
@@ -732,8 +723,6 @@ int irc_process_select_descriptors (irc_session_t * session, fd_set *in_set, fd_
 	|| session->state == LIBIRC_STATE_INIT
 	|| session->state == LIBIRC_STATE_DISCONNECTED )
 	{
-		printf("err sock %d\n", session->sock);
-		printf("state %d\n", session->state);
 		session->lasterror = LIBIRC_ERR_STATE;
 		return 1;
 	}
@@ -798,17 +787,9 @@ int irc_process_select_descriptors (irc_session_t * session, fd_set *in_set, fd_
 
 		return 0;
 	}
-	else if (session->state == LIBIRC_STATE_CONNECTING)
-	{
-	printf("sock %d\n", session->sock);
-	printf("is set? %d\n", FD_ISSET(session->sock, out_set));
-	}
 
 	if ( session->state != LIBIRC_STATE_CONNECTED )
-	{
-		printf("not connected\n");
 		return 1;
-	}
 
 	// Hey, we've got something to read!
 	if ( FD_ISSET (session->sock, in_set) )
@@ -822,7 +803,6 @@ int irc_process_select_descriptors (irc_session_t * session, fd_set *in_set, fd_
 		{
 			session->lasterror = (length == 0 ? LIBIRC_ERR_CLOSED : LIBIRC_ERR_TERMINATED);
 			session->state = LIBIRC_STATE_DISCONNECTED;
-			printf("err length %d\n", length);
 			return 1;
 		}
 
@@ -861,7 +841,6 @@ int irc_process_select_descriptors (irc_session_t * session, fd_set *in_set, fd_
 			session->state = LIBIRC_STATE_DISCONNECTED;
 
 			libirc_mutex_unlock (&session->mutex_session);
-			printf("2 err length %d\n", length);
 			return 1;
 		}
 
