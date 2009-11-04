@@ -26,6 +26,8 @@ static struct option long_options[] = {
 		{ "help", no_argument, 0, 'h' },
 		{ "debug", no_argument, 0, 'D' },
 		{ "version", no_argument, 0, 'V' },
+		{ "retries", required_argument, 0, 'r' },
+		{ "sleep", required_argument, 0, 's' },
 		{ 0, 0, 0, 0 }
 };
 
@@ -38,6 +40,8 @@ void print_help(char *argv[]) {
 	printf("Usage: %s [OPTION]...\n\n"
 		"Miscellaneous:\n"
 		"  -h, --help\t\tprint help information and exit\n"
+		"  -s, --sleep\t\tset the pre \"irc_run()\" micro sleep value (default is 500000)\n"
+		"  -r, --retries\t\tset the number of retries before {\"returnVal\":0}\n"
 		"  -D, --debug\t\tturn on debug output\n"
 		"  -V, --version\t\tprint version information and exit\n", argv[0]);
 
@@ -49,7 +53,7 @@ int getopts(int argc, char *argv[]) {
 
 	while (1) {
 		int option_index = 0;
-		c = getopt_long(argc, argv, "DVh", long_options, &option_index);
+		c = getopt_long(argc, argv, "DVhr:s:", long_options, &option_index);
 		if (c == -1)
 			break;
 		switch (c) {
@@ -64,6 +68,12 @@ int getopts(int argc, char *argv[]) {
 			print_help(argv);
 			retVal = 1;
 			break;
+        case 'r':
+        	max_retries = atoi(optarg);
+        	break;
+        case 's':
+        	pre_run_usleep = atoi(optarg);
+        	break;
 		case '?':
 			print_help(argv);
 			retVal = 1;
@@ -77,6 +87,9 @@ int getopts(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
+
+	max_retries = DEFAULT_MAX_RETRIES;
+	pre_run_usleep = DEFAULT_PRE_RUN_USLEEP;
 
 	if (getopts(argc, argv) == 1)
 		return 1;

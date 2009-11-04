@@ -22,6 +22,11 @@
 #include "luna_service.h"
 #include "client.h"
 
+#define DEFAULT_MAX_RETRIES 10
+#define DEFAULT_PRE_RUN_USLEEP 1000000
+
 int debug;
+int max_retries;
+int pre_run_usleep;
 
 #endif /* WIRCD_H_ */

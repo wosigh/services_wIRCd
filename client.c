@@ -18,10 +18,11 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <pthread.h>
 
-#include "luna_service.h"
-#include "client.h"
+
+#include "wIRCd.h"
 
 typedef enum {
 	msg_,
@@ -83,7 +84,6 @@ void *client_run(void *sessionToken) {
 		port = 6667;
 
 	int retry = 0;
-	int max_retries = 10;
 
 	while (true && retry<=max_retries) {
 
@@ -96,6 +96,7 @@ void *client_run(void *sessionToken) {
 		int c = irc_connect(client->session, client->server, (unsigned short int)port,
 				client->server_password, client->nick, client->username, client->realname);
 		irc_set_ctx(client->session,(void*)sessionToken);
+		usleep(pre_run_usleep);
 		irc_run(client->session);
 
 		if (client->estabilshed) {
