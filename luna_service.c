@@ -48,6 +48,7 @@ LSMethod lsmethods[] = {
 		{"client_cmd_user_mode",client_cmd_user_mode},
 		// Custom methods
 		{"client_cmd_ping",client_cmd_ping},
+		{"client_cmd_away",client_cmd_away},
 		{0,0}
 };
 
