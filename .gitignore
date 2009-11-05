@@ -1,3 +1,8 @@
 *.o
 *.ipk
 us.ryanhope.wircd
+libircclient/examples/censor
+libircclient/examples/colors
+libircclient/examples/ircftp
+libircclient/examples/irctest 
+libircclient/examples/spammer
