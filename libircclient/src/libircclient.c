@@ -787,6 +787,11 @@ int irc_process_select_descriptors (irc_session_t * session, fd_set *in_set, fd_
 
 		return 0;
 	}
+	else if (session->state == LIBIRC_STATE_CONNECTING && 
+			    1 /* Add some maximum connection retries or seconds here */ ) {
+		printf("Still connecting...\n");
+		return 0;
+	}
 
 	if ( session->state != LIBIRC_STATE_CONNECTED )
 		return 1;

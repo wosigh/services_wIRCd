@@ -23,7 +23,7 @@
 #include "client.h"
 
 #define DEFAULT_MAX_RETRIES 10
-#define DEFAULT_PRE_RUN_USLEEP 1000000
+#define DEFAULT_PRE_RUN_USLEEP 0
 
 int debug;
 int max_retries;
