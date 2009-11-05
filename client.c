@@ -72,7 +72,7 @@ void *client_run(void *sessionToken) {
 
 	// Basic connection info
 	json_get_string(object, "server", &client->server); // Required
-	json_get_string(object, "port", &client->port);
+	json_get_int(object, "port", &client->port);
 
 	// Server related connection info
 	json_get_string(object, "username", &client->username);
@@ -90,10 +90,6 @@ void *client_run(void *sessionToken) {
 		goto done;
 	}
 
-	int port = atoi(client->port);
-	if (port<1)
-		port = 6667;
-
 	int retry = 0;
 
 	while (true && retry<=max_retries) {
@@ -104,8 +100,8 @@ void *client_run(void *sessionToken) {
 			goto done;
 		}
 
-		int c = irc_connect(client->session, client->server, (unsigned short int)port,
-				client->server_password, client->nick, client->username, client->realname);
+		int c = irc_connect(client->session, client->server, (unsigned short int)client->port?client->port:6667,
+				client->server_password, client->nick, client->username?client->username:"wIRCer", client->realname);
 		irc_set_ctx(client->session,(void*)sessionToken);
 		usleep(pre_run_usleep);
 		irc_run(client->session);

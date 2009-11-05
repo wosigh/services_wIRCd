@@ -29,7 +29,7 @@ typedef struct {
 	pthread_t		thread;
 	LSMessage		*message;
 	const char 		*server;
-	const char	 	*port;
+	int			 	port;
 	const char 		*server_password;
 	const char 		*nick;
 	const char 		*username;
