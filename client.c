@@ -44,6 +44,15 @@ typedef enum {
 	away_,
 } irc_cmd;
 
+int irc_custom_cmd_away(irc_session_t *session, const char *reason) {
+	int retVal = -1;
+	if (reason)
+		retVal = irc_send_raw(session,"AWAY :%s",reason);
+	else
+		retVal = irc_send_raw(session,"AWAY");
+	return retVal;
+}
+
 void *client_run(void *sessionToken) {
 
 	LSError lserror;
@@ -317,7 +326,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case whois_: retVal = irc_cmd_whois(client->session, nick); break;
 		case user_mode_: retVal = irc_cmd_user_mode(client->session, mode); break;
 		case ping_: retVal = irc_send_raw(client->session,"PING :%s",server); break;
-		case away_: retVal = irc_send_raw(client->session,"AWAY :%s",reason); break;
+		case away_: retVal = irc_custom_cmd_away(client->session, reason); break;
 		}
 		char *jsonResponse = 0;
 		int len = 0;

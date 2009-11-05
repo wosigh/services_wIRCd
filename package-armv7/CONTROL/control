@@ -1,5 +1,5 @@
 Package: us.ryanhope.wircd
-Version: 0.0.1
+Version: 0.0.2
 Architecture: armv7
 Maintainer: Ryan Hope <rmh3093@gmail.com>
 Description: wIRCd - WebOS IRC Daemon
