@@ -40,6 +40,7 @@ typedef enum {
 	quit_,
 	whois_,
 	user_mode_,
+	ping_,
 } irc_cmd;
 
 void *client_run(void *sessionToken) {
@@ -227,6 +228,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 	char *topic = 0;
 	char *reason = 0;
 	char *mode = 0;
+	char *server = 0;
 
 	json_get_string(object, "sessionToken", &sessionToken);
 	json_get_string(object, "nch", &nch);
@@ -237,6 +239,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 	json_get_string(object, "topic", &topic);
 	json_get_string(object, "reason", &reason);
 	json_get_string(object, "mode", &mode);
+	json_get_string(object, "server", &server);
 
 	int len = 0;
 	if (txt)
@@ -312,6 +315,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case quit_: retVal = irc_cmd_quit(client->session, reason); break;
 		case whois_: retVal = irc_cmd_whois(client->session, nick); break;
 		case user_mode_: retVal = irc_cmd_user_mode(client->session, mode); break;
+		case ping_: retVal = irc_send_raw(client->session,"PING :%s",server); break;
 		}
 		char *jsonResponse = 0;
 		int len = 0;
@@ -391,4 +395,10 @@ bool client_cmd_whois(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 bool client_cmd_user_mode(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, user_mode_);
+}
+
+// Custom methods
+
+bool client_cmd_ping(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, ping_);
 }
