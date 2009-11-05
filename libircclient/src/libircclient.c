@@ -360,7 +360,10 @@ int irc_run (irc_session_t * session)
 		fd_set in_set, out_set;
 		int maxfd = 0;
 
-		tv.tv_usec = 250000;
+		if (session->state == LIBIRC_STATE_CONNECTING)
+			tv.tv_usec = 5000000;
+		else
+			tv.tv_usec = 250000;
 		tv.tv_sec = 0;
 
 		// Init sets
@@ -785,11 +788,6 @@ int irc_process_select_descriptors (irc_session_t * session, fd_set *in_set, fd_
 				session->realname ? session->realname : "noname");
 		irc_send_raw (session, buf);
 
-		return 0;
-	}
-	else if (session->state == LIBIRC_STATE_CONNECTING && 
-			    1 /* Add some maximum connection retries or seconds here */ ) {
-		printf("Still connecting...\n");
 		return 0;
 	}
 
