@@ -16,11 +16,10 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  =============================================================================*/
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <pthread.h>
-
 
 #include "wIRCd.h"
 
@@ -42,6 +41,7 @@ typedef enum {
 	user_mode_,
 	ping_,
 	away_,
+	disconnect_,
 } irc_cmd;
 
 int irc_custom_cmd_away(irc_session_t *session, const char *reason) {
@@ -141,6 +141,9 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 
 	client->estabilshed = 1;
 
+	if (!strcmp(event, "CONNECT"))
+		strcpy(client->ip_addr, (char *)inet_ntoa(session->local_addr));
+
 	char buf[1024];
 	int cnt;
 	int i;
@@ -166,7 +169,7 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 
 	int len = 0;
 	char *jsonResponse = 0;
-	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", sessionToken, event, origin ? origin : "NULL", buf);
+	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\",\"ipAddress\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", sessionToken, client->ip_addr, event, origin ? origin : "NULL", buf);
 
 	if (jsonResponse) {
 		LSError lserror;
@@ -198,7 +201,7 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	LSMessageRef(message);
 
-	wIRCd_client_t *client = malloc(sizeof(wIRCd_client_t));
+	wIRCd_client_t *client = calloc(1,sizeof(wIRCd_client_t));
 	client->message = message;
 
 	const char* sessionToken = LSMessageGetUniqueToken(message)+1;
@@ -323,6 +326,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case user_mode_: retVal = irc_cmd_user_mode(client->session, mode); break;
 		case ping_: retVal = irc_send_raw(client->session,"PING :%s",server); break;
 		case away_: retVal = irc_custom_cmd_away(client->session, reason); break;
+		case disconnect_: irc_destroy_session(client->session); retVal = client->session = 0; break;
 		}
 		char *jsonResponse = 0;
 		int len = 0;
@@ -412,4 +416,8 @@ bool client_cmd_ping(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 bool client_cmd_away(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, away_);
+}
+
+bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, disconnect_);
 }

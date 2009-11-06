@@ -49,6 +49,7 @@ LSMethod lsmethods[] = {
 		// Custom methods
 		{"client_cmd_ping",client_cmd_ping},
 		{"client_cmd_away",client_cmd_away},
+		{"client_cmd_disconnect",client_cmd_disconnect},
 		{0,0}
 };
 

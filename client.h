@@ -20,9 +20,17 @@
 #define CLIENT_H_
 
 #include <pthread.h>
+#include <time.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+
+#define IN_BUILDING_LIBIRC
+typedef int socket_t;
+typedef pthread_mutex_t port_mutex_t;
 
 #include <lunaservice.h>
 #include <libircclient.h>
+#include <libirc_session.h>
 
 typedef struct {
 	irc_session_t	*session;
@@ -35,6 +43,7 @@ typedef struct {
 	const char 		*username;
 	const char 		*realname;
 	int				estabilshed;
+	char ip_addr[16];
 } wIRCd_client_t;
 
 GHashTable *wIRCd_clients;
@@ -62,5 +71,6 @@ bool client_cmd_whois(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_user_mode(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_ping(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_away(LSHandle* lshandle, LSMessage *message, void *ctx);
+bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx);
 
 #endif /* CLIENT_H_ */
