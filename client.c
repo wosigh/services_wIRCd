@@ -326,7 +326,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case user_mode_: retVal = irc_cmd_user_mode(client->session, mode); break;
 		case ping_: retVal = irc_send_raw(client->session,"PING :%s",server); break;
 		case away_: retVal = irc_custom_cmd_away(client->session, reason); break;
-		case disconnect_: irc_destroy_session(client->session); retVal = client->session = 0; break;
+		case disconnect_: irc_disconnect(client->session); break;
 		}
 		char *jsonResponse = 0;
 		int len = 0;
