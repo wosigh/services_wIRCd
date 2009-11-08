@@ -145,8 +145,11 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 
 	client->estabilshed = 1;
 
-	if (!strcmp(event, "CONNECT"))
+	if (strcmp(event, "CONNECT")==0) {
 		strcpy(client->ip_addr, (char *)inet_ntoa(session->local_addr));
+		if (debug)
+			g_message("Connection established (%s)", client->ip_addr);
+	}
 
 	char buf[1024];
 	int cnt;
@@ -178,7 +181,7 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 	if (jsonResponse) {
 		LSError lserror;
 		LSErrorInit(&lserror);
-		if (debug)
+		if (debug>1)
 			g_message(jsonResponse);
 		LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
