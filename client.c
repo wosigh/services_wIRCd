@@ -98,7 +98,7 @@ void *client_run(void *sessionToken) {
 
 	while (true && retry<=max_retries) {
 
-		client->session = irc_create_session(&callbacks);
+		client->session = irc_create_session(&callbacks, client->interface);
 		if (!client->session) {
 			LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
 			goto done;
