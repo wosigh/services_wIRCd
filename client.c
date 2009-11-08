@@ -67,6 +67,7 @@ void *client_run(void *sessionToken) {
 	client->username = 0;
 	client->realname = 0;
 	client->estabilshed = 0;
+	client->interface = 0;
 
 	json_t *object = LSMessageGetPayloadJSON(client->message);
 
@@ -81,6 +82,9 @@ void *client_run(void *sessionToken) {
 	// Basic user info
 	json_get_string(object, "nick", &client->nick); // Required
 	json_get_string(object, "realname", &client->realname);
+
+	// Extra info
+	json_get_string(object, "interface", &client->interface);
 
 	if (!client->server) {
 		LSMessageReply(pub_serviceHandle,client->message,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);

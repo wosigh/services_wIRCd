@@ -42,6 +42,7 @@ typedef struct {
 	const char 		*nick;
 	const char 		*username;
 	const char 		*realname;
+	const char		*interface;
 	int				estabilshed;
 	char ip_addr[16];
 } wIRCd_client_t;
