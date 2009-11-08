@@ -83,7 +83,8 @@ irc_session_t * irc_create_session (irc_callbacks_t	* callbacks, const char * in
 	session->dcc_last_id = 1;
 	session->dcc_timeout = 60;
 
-	session->interface = strdup(interface);
+	if (interface != NULL)
+		session->interface = strdup(interface);
 
 	memcpy (&session->callbacks, callbacks, sizeof(irc_callbacks_t));
 
