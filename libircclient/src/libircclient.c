@@ -63,7 +63,7 @@ strnstr(s, find, slen)
 #define IS_DEBUG_ENABLED(s)	((s)->option & LIBIRC_OPTION_DEBUG)
 
 
-irc_session_t * irc_create_session (irc_callbacks_t	* callbacks)
+irc_session_t * irc_create_session (irc_callbacks_t	* callbacks, const char * interface)
 {
 	irc_session_t * session = malloc (sizeof(irc_session_t));
 
@@ -82,6 +82,8 @@ irc_session_t * irc_create_session (irc_callbacks_t	* callbacks)
 
 	session->dcc_last_id = 1;
 	session->dcc_timeout = 60;
+
+	session->interface = strdup(interface);
 
 	memcpy (&session->callbacks, callbacks, sizeof(irc_callbacks_t));
 
@@ -191,7 +193,7 @@ int irc_connect (irc_session_t * session,
     }
 
     // create the IRC server socket
-	if ( socket_create( PF_INET, SOCK_STREAM, &session->sock)
+	if ( socket_create( PF_INET, SOCK_STREAM, &session->sock, session->interface)
 	|| socket_make_nonblocking (&session->sock) )
 	{
 		session->lasterror = LIBIRC_ERR_SOCKET;

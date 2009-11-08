@@ -1,14 +1,14 @@
-/* 
+/*
  * Copyright (C) 2004-2009 Georgy Yunaev gyunaev@ulduzsoft.com
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2 of the License, or (at your 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
  * License for more details.
  */
 
@@ -18,7 +18,8 @@
 #if !defined (WIN32)
 	#include <sys/socket.h>
 	#include <netdb.h>
-	#include <arpa/inet.h>	
+	#include <arpa/inet.h>
+	#include <net/if.h>
 	#include <netinet/in.h>
 	#include <fcntl.h>
 
@@ -55,9 +56,14 @@ static int socket_error()
 }
 
 
-static int socket_create (int domain, int type, socket_t * sock)
+static int socket_create (int domain, int type, socket_t * sock, const char * interface)
 {
 	*sock = socket (domain, type, 0);
+    if(sock != -1 && interface != NULL) {
+    	struct ifreq iface;
+    	strncpy(iface.ifr_ifrn.ifrn_name, interface, IFNAMSIZ);
+		setsockopt(sock, SOL_SOCKET, SO_BINDTODEVICE, (char *)&iface, sizeof(iface));
+    }
 	return IS_SOCKET_ERROR(*sock) ? 1 : 0;
 }
 
