@@ -53,6 +53,11 @@ LSMethod lsmethods[] = {
 		{0,0}
 };
 
+bool connectionManagerHandler(LSHandle *sh, LSMessage *reply, void *ctx) {
+	g_message("%s",LSMessageGetPayload(reply));
+	return true;
+}
+
 bool luna_service_initialize() {
 
 	bool retVal = FALSE;
@@ -75,6 +80,9 @@ bool luna_service_initialize() {
 			NULL, NULL, NULL, &lserror);
 	if (retVal)
 		retVal = LSGmainAttachPalmService(serviceHandle, loop, &lserror);
+
+	LSCall(pub_serviceHandle, "luna://com.palm.connectionmanager/getstatus",
+        "{\"subscribe\":true}", connectionManagerHandler, NULL, NULL, &lserror);
 
 	end: if (LSErrorIsSet(&lserror)) {
 		LSErrorPrint(&lserror, stderr);
