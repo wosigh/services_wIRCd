@@ -50,6 +50,8 @@ LSMethod lsmethods[] = {
 		{"client_cmd_ping",client_cmd_ping},
 		{"client_cmd_away",client_cmd_away},
 		{"client_cmd_disconnect",client_cmd_disconnect},
+		// Random info
+		{"client_get_version",client_get_version},
 		{0,0}
 };
 
@@ -81,8 +83,8 @@ bool luna_service_initialize() {
 	if (retVal)
 		retVal = LSGmainAttachPalmService(serviceHandle, loop, &lserror);
 
-	LSCall(pub_serviceHandle, "luna://com.palm.connectionmanager/getstatus",
-        "{\"subscribe\":true}", connectionManagerHandler, NULL, NULL, &lserror);
+	/*LSCall(pub_serviceHandle, "luna://com.palm.connectionmanager/getstatus",
+        "{\"subscribe\":true}", connectionManagerHandler, NULL, NULL, &lserror);*/
 
 	end: if (LSErrorIsSet(&lserror)) {
 		LSErrorPrint(&lserror, stderr);

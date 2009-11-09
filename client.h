@@ -73,5 +73,6 @@ bool client_cmd_user_mode(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_ping(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_away(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx);
+bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx);
 
 #endif /* CLIENT_H_ */

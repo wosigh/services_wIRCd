@@ -428,3 +428,28 @@ bool client_cmd_away(LSHandle* lshandle, LSMessage *message, void *ctx) {
 bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, disconnect_);
 }
+
+// Random info
+
+bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx) {
+
+	bool retVal = true;
+
+	LSError lserror;
+	LSErrorInit(&lserror);
+
+	char *jsonResponse = 0;
+	int len = 0;
+
+	len = asprintf(&jsonResponse, "{\"serviceVersion\":\"%s\"}", VERSION);
+	if (jsonResponse) {
+		LSMessageReply(lshandle,message,jsonResponse,&lserror);
+		free(jsonResponse);
+	} else
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Generic error\"}",&lserror);
+
+	LSErrorFree(&lserror);
+
+	return retVal;
+
+}
