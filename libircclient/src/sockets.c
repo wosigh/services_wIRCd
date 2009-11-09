@@ -59,7 +59,7 @@ static int socket_error()
 static int socket_create (int domain, int type, socket_t * sock, const char * interface)
 {
 	*sock = socket (domain, type, 0);
-    if((int)sock != -1 && interface != NULL) {
+    if(*sock != -1 && interface != NULL) {
     	struct ifreq iface;
     	strncpy(iface.ifr_ifrn.ifrn_name, interface, IFNAMSIZ);
 		setsockopt(*sock, SOL_SOCKET, SO_BINDTODEVICE, (char *)&iface, sizeof(iface));
