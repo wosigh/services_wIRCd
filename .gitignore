@@ -2,8 +2,7 @@
 *.ipk
 us.ryanhope.wircd
 *.swp
-libircclient/examples/censor
-libircclient/examples/colors
-libircclient/examples/ircftp
-libircclient/examples/irctest 
-libircclient/examples/spammer
+libircclient/autom4te.cache
+libircclient/config.log
+libircclient/config.status
+

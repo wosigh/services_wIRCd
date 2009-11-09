@@ -355,47 +355,47 @@ configure:4455: checking for stdlib.h
 configure:4462: result: yes
 configure:4601: checking for GNU libc compatible malloc
 configure:4666: result: no
-configure:4707: checking sys/select.h usability
-configure:4724: armv7l-softfloat-linux-gnueabi-gcc -c -g -O2  conftest.c >&5
-configure:4731: $? = 0
-configure:4745: result: yes
-configure:4749: checking sys/select.h presence
-configure:4764: armv7l-softfloat-linux-gnueabi-gcc -E  conftest.c
-configure:4771: $? = 0
-configure:4785: result: yes
-configure:4818: checking for sys/select.h
-configure:4827: result: yes
-configure:4707: checking sys/socket.h usability
-configure:4724: armv7l-softfloat-linux-gnueabi-gcc -c -g -O2  conftest.c >&5
-configure:4731: $? = 0
-configure:4745: result: yes
-configure:4749: checking sys/socket.h presence
-configure:4764: armv7l-softfloat-linux-gnueabi-gcc -E  conftest.c
-configure:4771: $? = 0
-configure:4785: result: yes
-configure:4818: checking for sys/socket.h
-configure:4827: result: yes
-configure:4842: checking types of arguments for select
-configure:4880: armv7l-softfloat-linux-gnueabi-gcc -c -g -O2  conftest.c >&5
-configure:4887: $? = 0
-configure:4908: result: int,fd_set *,struct timeval *
-configure:4931: checking whether lstat dereferences a symlink specified with a trailing slash
-configure:5005: result: no
-configure:5024: checking whether stat accepts an empty string
-configure:5085: result: yes
-configure:5106: checking for localtime_r
-configure:5162: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2   conftest.c  >&5
-configure:5169: $? = 0
-configure:5191: result: yes
-configure:5106: checking for socket
-configure:5162: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2   conftest.c  >&5
-configure:5169: $? = 0
-configure:5191: result: yes
-configure:5204: checking for socket in -lsocket
-configure:5239: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2   conftest.c -lsocket   >&5
+configure:4711: checking sys/select.h usability
+configure:4728: armv7l-softfloat-linux-gnueabi-gcc -c -g -O2  conftest.c >&5
+configure:4735: $? = 0
+configure:4749: result: yes
+configure:4753: checking sys/select.h presence
+configure:4768: armv7l-softfloat-linux-gnueabi-gcc -E  conftest.c
+configure:4775: $? = 0
+configure:4789: result: yes
+configure:4822: checking for sys/select.h
+configure:4831: result: yes
+configure:4711: checking sys/socket.h usability
+configure:4728: armv7l-softfloat-linux-gnueabi-gcc -c -g -O2  conftest.c >&5
+configure:4735: $? = 0
+configure:4749: result: yes
+configure:4753: checking sys/socket.h presence
+configure:4768: armv7l-softfloat-linux-gnueabi-gcc -E  conftest.c
+configure:4775: $? = 0
+configure:4789: result: yes
+configure:4822: checking for sys/socket.h
+configure:4831: result: yes
+configure:4846: checking types of arguments for select
+configure:4884: armv7l-softfloat-linux-gnueabi-gcc -c -g -O2  conftest.c >&5
+configure:4891: $? = 0
+configure:4912: result: int,fd_set *,struct timeval *
+configure:4935: checking whether lstat dereferences a symlink specified with a trailing slash
+configure:5009: result: no
+configure:5028: checking whether stat accepts an empty string
+configure:5089: result: yes
+configure:5110: checking for localtime_r
+configure:5166: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2   conftest.c  >&5
+configure:5173: $? = 0
+configure:5195: result: yes
+configure:5110: checking for socket
+configure:5166: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2   conftest.c  >&5
+configure:5173: $? = 0
+configure:5195: result: yes
+configure:5208: checking for socket in -lsocket
+configure:5243: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2   conftest.c -lsocket   >&5
 /usr/libexec/gcc/armv7l-softfloat-linux-gnueabi/ld: cannot find -lsocket
 collect2: ld returned 1 exit status
-configure:5246: $? = 1
+configure:5250: $? = 1
 configure: failed program was:
 | /* confdefs.h.  */
 | #define PACKAGE_NAME "libircclient"
@@ -418,6 +418,7 @@ configure: failed program was:
 | #define TIME_WITH_SYS_TIME 1
 | #define HAVE_STDLIB_H 1
 | #define HAVE_MALLOC 0
+| #define malloc rpl_malloc
 | #define HAVE_SYS_SELECT_H 1
 | #define HAVE_SYS_SOCKET_H 1
 | #define SELECT_TYPE_ARG1 int
@@ -442,20 +443,20 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:5267: result: no
-configure:5465: checking for gethostbyname_r
-configure:5521: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2 -O3   conftest.c  >&5
-configure:5528: $? = 0
-configure:5550: result: yes
-configure:5465: checking for inet_ntoa
-configure:5521: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2 -O3   conftest.c  >&5
-configure:5528: $? = 0
-configure:5550: result: yes
-configure:5562: checking for inet_ntoa in -lnsl
-configure:5597: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2 -O3   conftest.c -lnsl   >&5
-configure:5604: $? = 0
-configure:5625: result: yes
-configure:5748: creating ./config.status
+configure:5271: result: no
+configure:5469: checking for gethostbyname_r
+configure:5525: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2 -O3   conftest.c  >&5
+configure:5532: $? = 0
+configure:5554: result: yes
+configure:5469: checking for inet_ntoa
+configure:5525: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2 -O3   conftest.c  >&5
+configure:5532: $? = 0
+configure:5554: result: yes
+configure:5566: checking for inet_ntoa in -lnsl
+configure:5601: armv7l-softfloat-linux-gnueabi-gcc -o conftest -g -O2 -O3   conftest.c -lnsl   >&5
+configure:5608: $? = 0
+configure:5629: result: yes
+configure:5752: creating ./config.status
 
 ## ---------------------- ##
 ## Running config.status. ##
@@ -472,7 +473,6 @@ generated by GNU Autoconf 2.63.  Invocation command line was
 
 on Redman
 
-config.status:744: creating examples/Makefile
 config.status:744: creating src/Makefile
 config.status:744: creating include/config.h
 config.status:955: include/config.h is unchanged
@@ -630,6 +630,7 @@ target_alias=''
 #define TIME_WITH_SYS_TIME 1
 #define HAVE_STDLIB_H 1
 #define HAVE_MALLOC 0
+#define malloc rpl_malloc
 #define HAVE_SYS_SELECT_H 1
 #define HAVE_SYS_SOCKET_H 1
 #define SELECT_TYPE_ARG1 int

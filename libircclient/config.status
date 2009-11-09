@@ -322,7 +322,7 @@ on `(hostname || uname -n) 2>/dev/null | sed 1q`
 "
 
 # Files that config.status was made for.
-config_files=" examples/Makefile src/Makefile"
+config_files=" src/Makefile"
 config_headers=" include/config.h"
 
 ac_cs_usage="\
@@ -359,7 +359,7 @@ Copyright (C) 2008 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/rmh3093/workspace/preyourmind/wIRCd/libircclient'
+ac_pwd='/home/rmh3093/workspace/webosinternals/wIRCd/libircclient'
 srcdir='.'
 test -n "$AWK" || AWK=awk
 # The default lists apply if the user does not specify any file.
@@ -455,7 +455,6 @@ for ac_config_target in $ac_config_targets
 do
   case $ac_config_target in
     "include/config.h") CONFIG_HEADERS="$CONFIG_HEADERS include/config.h" ;;
-    "examples/Makefile") CONFIG_FILES="$CONFIG_FILES examples/Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
@@ -637,6 +636,7 @@ D["HAVE_STDBOOL_H"]=" 1"
 D["TIME_WITH_SYS_TIME"]=" 1"
 D["HAVE_STDLIB_H"]=" 1"
 D["HAVE_MALLOC"]=" 0"
+D["malloc"]=" rpl_malloc"
 D["HAVE_SYS_SELECT_H"]=" 1"
 D["HAVE_SYS_SOCKET_H"]=" 1"
 D["SELECT_TYPE_ARG1"]=" int"

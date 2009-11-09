@@ -103,5 +103,8 @@
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */
 
+/* Define to rpl_malloc if the replacement function should be used. */
+#define malloc rpl_malloc
+
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
