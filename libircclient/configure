@@ -4683,10 +4683,6 @@ _ACEOF
 esac
 
 
-cat >>confdefs.h <<\_ACEOF
-#define malloc rpl_malloc
-_ACEOF
-
 fi
 
 
