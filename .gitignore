@@ -1,8 +1,12 @@
-*.o
-*.ipk
 us.ryanhope.wircd
-*.swp
 libircclient/autom4te.cache
 libircclient/config.log
 libircclient/config.status
-
+libircclient/src/Makefile
+*.o
+*.a
+*.eg
+*.ipk
+*.swp
+*.swo
+*.swn
