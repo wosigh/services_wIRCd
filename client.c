@@ -182,7 +182,7 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 		LSError lserror;
 		LSErrorInit(&lserror);
 		if (debug>1)
-			g_message(jsonResponse);
+			g_message("%s", jsonResponse);
 		LSMessageReply(pub_serviceHandle,client->message,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
 		free(jsonResponse);
