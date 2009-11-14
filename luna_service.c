@@ -50,6 +50,8 @@ LSMethod lsmethods[] = {
 		{"client_cmd_ping",client_cmd_ping},
 		{"client_cmd_away",client_cmd_away},
 		{"client_cmd_disconnect",client_cmd_disconnect},
+		// Raw
+		{"client_send_raw",client_send_raw},
 		// Random info
 		{"client_get_version",client_get_version},
 		{0,0}

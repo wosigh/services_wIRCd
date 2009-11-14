@@ -42,6 +42,7 @@ typedef enum {
 	ping_,
 	away_,
 	disconnect_,
+	raw_,
 } irc_cmd;
 
 int irc_custom_cmd_away(irc_session_t *session, const char *reason) {
@@ -245,6 +246,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 	char *reason = 0;
 	char *mode = 0;
 	char *server = 0;
+	char *command = 0;
 
 	json_get_string(object, "sessionToken", &sessionToken);
 	json_get_string(object, "nch", &nch);
@@ -256,6 +258,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 	json_get_string(object, "reason", &reason);
 	json_get_string(object, "mode", &mode);
 	json_get_string(object, "server", &server);
+	json_get_string(object, "command", &server);
 
 	int len = 0;
 	if (txt)
@@ -333,6 +336,7 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case user_mode_: retVal = irc_cmd_user_mode(client->session, mode); break;
 		case ping_: retVal = irc_send_raw(client->session,"PING :%s",server); break;
 		case away_: retVal = irc_custom_cmd_away(client->session, reason); break;
+		case raw_: retVal = irc_send_raw(client->session, "%s", command); break;
 		case disconnect_: irc_disconnect(client->session); break;
 		}
 		char *jsonResponse = 0;
@@ -427,6 +431,10 @@ bool client_cmd_away(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, disconnect_);
+}
+
+bool client_cmd_raw(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_command(lshandle, message, raw_);
 }
 
 // Random info
