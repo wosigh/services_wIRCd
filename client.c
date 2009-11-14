@@ -433,7 +433,7 @@ bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, disconnect_);
 }
 
-bool client_cmd_raw(LSHandle* lshandle, LSMessage *message, void *ctx) {
+bool client_send_raw(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, raw_);
 }
 
