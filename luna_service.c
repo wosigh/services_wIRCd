@@ -57,6 +57,11 @@ LSMethod lsmethods[] = {
 		{0,0}
 };
 
+LSMethod lssubscriptionmethods[] = {
+		{"event_numeric",sub_event_numeric},
+		{0,0}
+};
+
 bool connectionManagerHandler(LSHandle *sh, LSMessage *reply, void *ctx) {
 	g_message("%s",LSMessageGetPayload(reply));
 	return true;

@@ -77,4 +77,7 @@ bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_send_raw(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx);
 
+// New subscriptions
+bool sub_event_numeric(LSHandle* lshandle, LSMessage *message, void *ctx);
+
 #endif /* CLIENT_H_ */

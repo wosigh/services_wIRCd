@@ -461,3 +461,40 @@ bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return retVal;
 
 }
+
+/*
+ * New Methods
+ */
+
+// Initialize client
+bool init_client(LSHandle* lshandle, LSMessage *message, void *ctx) {
+
+	LSError lserror;
+	LSErrorInit(&lserror);
+
+	const char *sessionToken = LSMessageGetUniqueToken(message)+1;
+	wIRCd_client_t *client = calloc(1,sizeof(wIRCd_client_t));
+
+	int len = 0;
+	char *jsonResponse = 0;
+
+	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\"}", sessionToken);
+	if (jsonResponse) {
+		g_hash_table_insert(wIRCd_clients, (gpointer)sessionToken, (gpointer)client);
+		LSMessageReply(lshandle,message,jsonResponse,&lserror);
+		free(jsonResponse);
+	} else {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
+		free(client);
+	}
+
+	LSErrorFree(&lserror);
+
+	return true;
+
+}
+
+// Per-callback subscriptions
+bool sub_event_numeric(LSHandle* lshandle, LSMessage *message, void *ctx) {
+
+}
