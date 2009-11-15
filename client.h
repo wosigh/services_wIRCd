@@ -64,8 +64,6 @@ typedef struct {
 	LSMessage		*msg_event_ctcp_action;
 	LSMessage		*msg_event_unknown;
 	LSMessage		*msg_event_numeric;
-	LSMessage		*msg_event_dcc_chat_req;
-	LSMessage		*msg_event_dcc_send_req;
 } wIRCd_client_t;
 
 GHashTable *wIRCd_clients;
