@@ -16,19 +16,11 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  =============================================================================*/
 
-#ifndef WIRCD_H_
-#define WIRCD_H_
+#ifndef SUBSCRIPTIONS_H_
+#define SUBSCRIPTIONS_H_
 
-#include "subscriptions.h"
-#include "luna_service.h"
-#include "client.h"
+#include <lunaservice.h>
 
-#define DEFAULT_MAX_RETRIES 10
-#define DEFAULT_PRE_RUN_USLEEP 0
-#define DEFAULT_DEBUG_LEVEL 0
+bool register_subscriptions(LSPalmService *serviceHandle, LSError lserror);
 
-int debug;
-int max_retries;
-int pre_run_usleep;
-
-#endif /* WIRCD_H_ */
+#endif /* SUBSCRIPTIONS_H_ */

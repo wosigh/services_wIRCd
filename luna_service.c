@@ -57,11 +57,6 @@ LSMethod lsmethods[] = {
 		{0,0}
 };
 
-LSMethod lssubscriptionmethods[] = {
-		{"event_numeric",sub_event_numeric},
-		{0,0}
-};
-
 bool connectionManagerHandler(LSHandle *sh, LSMessage *reply, void *ctx) {
 	g_message("%s",LSMessageGetPayload(reply));
 	return true;
@@ -87,6 +82,9 @@ bool luna_service_initialize() {
 
 	retVal = LSPalmServiceRegisterCategory(serviceHandle, "/", lsmethods,
 			NULL, NULL, NULL, &lserror);
+
+	retVal = register_subscriptions(serviceHandle, lserror);
+
 	if (retVal)
 		retVal = LSGmainAttachPalmService(serviceHandle, loop, &lserror);
 

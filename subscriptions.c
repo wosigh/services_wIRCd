@@ -180,3 +180,31 @@ bool sub_event_unknown(LSHandle* lshandle, LSMessage *message, void *ctx) {
 bool sub_event_numeric(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_subscription(lshandle, message, event_numeric_);
 }
+
+LSMethod lssubscriptionmethods[] = {
+		{"event_connect", sub_event_connect},
+		{"event_nick", sub_event_nick},
+		{"event_quit", sub_event_quit},
+		{"event_join", sub_event_join},
+		{"event_part", sub_event_part},
+		{"event_mode", sub_event_mode},
+		{"event_umode", sub_event_umode},
+		{"event_topic", sub_event_topic},
+		{"event_kick", sub_event_kick},
+		{"event_channel", sub_event_channel},
+		{"event_privmsg", sub_event_privmsg},
+		{"event_notice", sub_event_notice},
+		{"event_channel_notice", sub_event_channel_notice},
+		{"event_invite", sub_event_invite},
+		{"event_ctcp_req", sub_event_ctcp_req},
+		{"event_ctcp_rep", sub_event_ctcp_rep},
+		{"event_ctcp_action", sub_event_ctcp_action},
+		{"event_unknown", sub_event_unknown},
+		{"event_numeric", sub_event_numeric},
+		{0,0}
+};
+
+bool register_subscriptions(LSPalmService *serviceHandle, LSError lserror) {
+	return LSPalmServiceRegisterCategory(serviceHandle, "/subscriptions",
+			lssubscriptionmethods, NULL, NULL, NULL, &lserror);
+}
