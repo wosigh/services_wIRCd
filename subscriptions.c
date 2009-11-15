@@ -67,7 +67,7 @@ bool process_subscription(LSHandle* lshandle, LSMessage *message, irc_sub type) 
 		goto end;
 	}
 
-	if (sessionToken==0 || client==null) {
+	if (sessionToken==0 || client==NULL) {
 		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Missing or invalid sessionToken\"}",&lserror);
 		retVal = false;
 		goto end;

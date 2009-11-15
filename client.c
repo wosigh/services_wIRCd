@@ -493,8 +493,3 @@ bool init_client(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return true;
 
 }
-
-// Per-callback subscriptions
-bool sub_event_numeric(LSHandle* lshandle, LSMessage *message, void *ctx) {
-
-}

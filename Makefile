@@ -22,7 +22,7 @@ LIBS			= 	-lglib-2.0 -llunaservice
 
 PROGRAM			= 	us.ryanhope.wircd
 
-OBJECTS			= 	client.o luna_service.o main.o
+OBJECTS			= 	subscriptions.o client.o luna_service.o main.o
 
 ARCHIVES		=	libircclient/src/libircclient.a
 
