@@ -35,7 +35,7 @@ typedef pthread_mutex_t port_mutex_t;
 typedef struct {
 	irc_session_t	*session;
 	pthread_t		thread;
-	LSMessage		*message;
+	LSMessage		*message_oldschool;
 	const char 		*server;
 	int			 	port;
 	const char 		*server_password;
