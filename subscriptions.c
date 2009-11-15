@@ -23,29 +23,7 @@
 
 #include "wIRCd.h"
 
-typedef enum {
-	event_connect_,
-	event_nick_,
-	event_quit_,
-	event_join_,
-	event_part_,
-	event_mode_,
-	event_umode_,
-	event_topic_,
-	event_kick_,
-	event_channel_,
-	event_privmsg_,
-	event_notice_,
-	event_channel_notice_,
-	event_invite_,
-	event_ctcp_req_,
-	event_ctcp_rep_,
-	event_ctcp_action_,
-	event_unknown_,
-	event_numeric_,
-} irc_sub;
-
-bool process_subscription(LSHandle* lshandle, LSMessage *message, irc_sub type) {
+bool process_subscription(LSHandle* lshandle, LSMessage *message, irc_callbacks type) {
 
 	bool retVal = true;
 

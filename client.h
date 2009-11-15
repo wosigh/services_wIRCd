@@ -66,37 +66,6 @@ typedef struct {
 	LSMessage		*msg_event_numeric;
 } wIRCd_client_t;
 
-GHashTable *wIRCd_clients;
-
-irc_callbacks_t	callbacks;
-
-void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
-
-void handle_event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count);
-
-bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_me(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_notice(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_join(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_part(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_invite(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_names(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_list(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_topic(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_channel_mode(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_kick(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_nick(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_quit(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_whois(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_user_mode(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_ping(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_away(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_cmd_disconnect(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_send_raw(LSHandle* lshandle, LSMessage *message, void *ctx);
-bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx);
-
-// New subscriptions
-bool sub_event_numeric(LSHandle* lshandle, LSMessage *message, void *ctx);
+bool register_commands(LSPalmService *serviceHandle, LSError lserror);
 
 #endif /* CLIENT_H_ */

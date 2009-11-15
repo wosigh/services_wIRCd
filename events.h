@@ -16,46 +16,9 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  =============================================================================*/
 
-#ifndef WIRCD_H_
-#define WIRCD_H_
+#ifndef EVENTS_H_
+#define EVENTS_H_
 
-#include "subscriptions.h"
-#include "luna_service.h"
-#include "client.h"
-#include "events.h"
+void setup_event_callbacks();
 
-#define DEFAULT_MAX_RETRIES 10
-#define DEFAULT_PRE_RUN_USLEEP 0
-#define DEFAULT_DEBUG_LEVEL 0
-
-int debug;
-int max_retries;
-int pre_run_usleep;
-
-GHashTable *wIRCd_clients;
-
-irc_callbacks_t	callbacks;
-
-typedef enum {
-	event_connect_,
-	event_nick_,
-	event_quit_,
-	event_join_,
-	event_part_,
-	event_mode_,
-	event_umode_,
-	event_topic_,
-	event_kick_,
-	event_channel_,
-	event_privmsg_,
-	event_notice_,
-	event_channel_notice_,
-	event_invite_,
-	event_ctcp_req_,
-	event_ctcp_rep_,
-	event_ctcp_action_,
-	event_unknown_,
-	event_numeric_,
-} irc_callbacks;
-
-#endif /* WIRCD_H_ */
+#endif /* EVENTS_H_ */

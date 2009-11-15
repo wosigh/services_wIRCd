@@ -139,67 +139,6 @@ void *client_run(void *sessionToken) {
 
 }
 
-void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
-
-	char *sessionToken = (char*)irc_get_ctx(session);
-	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
-
-	client->estabilshed = 1;
-
-	if (strcmp(event, "CONNECT")==0) {
-		strcpy(client->ip_addr, (char *)inet_ntoa(session->local_addr));
-		if (debug)
-			g_message("Connection established (%s)", client->ip_addr);
-	}
-
-	char buf[1024];
-	int cnt;
-	int i;
-	int j = 0;
-
-	for (cnt = 0; cnt < count; cnt++) {
-		if (cnt)
-			buf[j++]=',';
-
-		buf[j++]='"';
-
-		for (i = 0; i < strlen(params[cnt]); i++) {
-			if (params[cnt][i] == '"')
-				buf[j++] = '\\';
-
-			buf[j++] = params[cnt][i];
-		}
-
-		buf[j++]='"';
-	}
-
-	buf[j]='\0';
-
-	int len = 0;
-	char *jsonResponse = 0;
-	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\",\"ipAddress\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", sessionToken, client->ip_addr, event, origin ? origin : "NULL", buf);
-
-	if (jsonResponse) {
-		LSError lserror;
-		LSErrorInit(&lserror);
-		if (debug>1)
-			g_message("%s", jsonResponse);
-		LSMessageReply(pub_serviceHandle,client->message_monolithic,jsonResponse,&lserror);
-		LSErrorFree(&lserror);
-		free(jsonResponse);
-	}
-
-}
-
-void handle_event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
-
-	char buf[24];
-	sprintf(buf, "%d", event);
-
-	dump_event(session, buf, origin, params, count);
-
-}
-
 bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	bool retVal = true;
@@ -460,4 +399,41 @@ bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	return retVal;
 
+}
+
+LSMethod lscommandmethods[] = {
+		// Connection subscription
+		{"client_connect",client_connect},
+		// Message methods
+		{"client_cmd_msg",client_cmd_msg},
+		{"client_cmd_me",client_cmd_me},
+		{"client_cmd_notice",client_cmd_notice},
+		// Channel methods
+		{"client_cmd_join",client_cmd_join},
+		{"client_cmd_part",client_cmd_part},
+		{"client_cmd_invite",client_cmd_invite},
+		{"client_cmd_names",client_cmd_names},
+		{"client_cmd_list",client_cmd_list},
+		{"client_cmd_topic",client_cmd_topic},
+		{"client_cmd_channel_mode",client_cmd_channel_mode},
+		{"client_cmd_kick",client_cmd_kick},
+		// Misc methods
+		{"client_cmd_nick",client_cmd_nick},
+		{"client_cmd_quit",client_cmd_quit},
+		{"client_cmd_whois",client_cmd_whois},
+		{"client_cmd_user_mode",client_cmd_user_mode},
+		// Custom methods
+		{"client_cmd_ping",client_cmd_ping},
+		{"client_cmd_away",client_cmd_away},
+		{"client_cmd_disconnect",client_cmd_disconnect},
+		// Raw
+		{"client_send_raw",client_send_raw},
+		// Random info
+		{"client_get_version",client_get_version},
+		{0,0}
+};
+
+bool register_commands(LSPalmService *serviceHandle, LSError lserror) {
+	return LSPalmServiceRegisterCategory(serviceHandle, "/", lscommandmethods,
+				NULL, NULL, NULL, &lserror);
 }
