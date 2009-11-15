@@ -70,7 +70,7 @@ void *client_run(void *sessionToken) {
 	client->estabilshed = 0;
 	client->interface = 0;
 
-	json_t *object = LSMessageGetPayloadJSON(client->message_oldschool);
+	json_t *object = LSMessageGetPayloadJSON(client->message_monolithic);
 
 	// Basic connection info
 	json_get_string(object, "server", &client->server); // Required
@@ -88,10 +88,10 @@ void *client_run(void *sessionToken) {
 	json_get_string(object, "interface", &client->interface);
 
 	if (!client->server) {
-		LSMessageReply(pub_serviceHandle,client->message_oldschool,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);
+		LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);
 		goto done;
 	} else if (!client->nick) {
-		LSMessageReply(pub_serviceHandle,client->message_oldschool,"{\"returnValue\":-1,\"errorText\":\"Nick missing\"}",&lserror);
+		LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":-1,\"errorText\":\"Nick missing\"}",&lserror);
 		goto done;
 	}
 
@@ -101,7 +101,7 @@ void *client_run(void *sessionToken) {
 
 		client->session = irc_create_session(&callbacks, client->interface);
 		if (!client->session) {
-			LSMessageReply(pub_serviceHandle,client->message_oldschool,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
+			LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
 			goto done;
 		}
 
@@ -122,8 +122,8 @@ void *client_run(void *sessionToken) {
 
 	}
 
-	LSMessageReply(pub_serviceHandle,client->message_oldschool,"{\"returnValue\":0}",&lserror);
-	LSMessageUnref(client->message_oldschool);
+	LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":0}",&lserror);
+	LSMessageUnref(client->message_monolithic);
 
 	done:
 
@@ -184,7 +184,7 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 		LSErrorInit(&lserror);
 		if (debug>1)
 			g_message("%s", jsonResponse);
-		LSMessageReply(pub_serviceHandle,client->message_oldschool,jsonResponse,&lserror);
+		LSMessageReply(pub_serviceHandle,client->message_monolithic,jsonResponse,&lserror);
 		LSErrorFree(&lserror);
 		free(jsonResponse);
 	}
@@ -210,7 +210,7 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	LSMessageRef(message);
 
 	wIRCd_client_t *client = calloc(1,sizeof(wIRCd_client_t));
-	client->message_oldschool = message;
+	client->message_monolithic = message;
 
 	const char* sessionToken = LSMessageGetUniqueToken(message)+1;
 

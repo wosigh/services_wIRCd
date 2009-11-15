@@ -35,7 +35,7 @@ typedef pthread_mutex_t port_mutex_t;
 typedef struct {
 	irc_session_t	*session;
 	pthread_t		thread;
-	LSMessage		*message_oldschool;
+	LSMessage		*message_monolithic;
 	const char 		*server;
 	int			 	port;
 	const char 		*server_password;
@@ -45,6 +45,27 @@ typedef struct {
 	const char		*interface;
 	int				estabilshed;
 	char ip_addr[16];
+	LSMessage		*msg_event_connect;
+	LSMessage		*msg_event_nick;
+	LSMessage		*msg_event_quit;
+	LSMessage		*msg_event_join;
+	LSMessage		*msg_event_part;
+	LSMessage		*msg_event_mode;
+	LSMessage		*msg_event_umode;
+	LSMessage		*msg_event_topic;
+	LSMessage		*msg_event_kick;
+	LSMessage		*msg_event_channel;
+	LSMessage		*msg_event_privmsg;
+	LSMessage		*msg_event_notice;
+	LSMessage		*msg_event_channel_notice;
+	LSMessage		*msg_event_invite;
+	LSMessage		*msg_event_ctcp_req;
+	LSMessage		*msg_event_ctcp_rep;
+	LSMessage		*msg_event_ctcp_action;
+	LSMessage		*msg_event_unknown;
+	LSMessage		*msg_event_numeric;
+	LSMessage		*msg_event_dcc_chat_req;
+	LSMessage		*msg_event_dcc_send_req;
 } wIRCd_client_t;
 
 GHashTable *wIRCd_clients;
