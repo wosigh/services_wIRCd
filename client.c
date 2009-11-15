@@ -191,7 +191,7 @@ void dump_event(irc_session_t * session, const char * event, const char * origin
 
 }
 
-void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
+void handle_event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count) {
 
 	char buf[24];
 	sprintf(buf, "%d", event);

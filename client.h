@@ -52,7 +52,8 @@ GHashTable *wIRCd_clients;
 irc_callbacks_t	callbacks;
 
 void dump_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count);
-void event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count);
+
+void handle_event_numeric(irc_session_t * session, unsigned int event, const char * origin, const char ** params, unsigned int count);
 
 bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx);
 bool client_cmd_msg(LSHandle* lshandle, LSMessage *message, void *ctx);
