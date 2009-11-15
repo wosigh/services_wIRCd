@@ -484,7 +484,7 @@ bool init_client(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		LSMessageReply(lshandle,message,jsonResponse,&lserror);
 		free(jsonResponse);
 	} else {
-		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create client session\"}",&lserror);
 		free(client);
 	}
 
