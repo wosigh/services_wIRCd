@@ -54,6 +54,17 @@ int irc_custom_cmd_away(irc_session_t *session, const char *reason) {
 	return retVal;
 }
 
+
+// Probably a race condition in this, probably need some sort of lock to be safe
+void *live_or_die(void *ptr) {
+	wIRCd_client_t *client = (wIRCd_client_t *)ptr;
+	sleep(60);
+	if (!client->thread) {
+		g_hash_table_remove(wIRCd_clients, (gconstpointer)client->sessionToken);
+		free(client);
+	}
+}
+
 void *client_run(void *ptr) {
 
 	LSError lserror;
@@ -444,12 +455,18 @@ bool client_init(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	len = asprintf(&client->sessionToken, "%s", LSMessageGetUniqueToken(message)+1);
 
 	client->estabilshed = 0;
+	client->thread = 0;
 
 	char *jsonResponse = 0;
 
 	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\"}", client->sessionToken);
 	if (jsonResponse) {
+		pthread_t ld;
 		g_hash_table_insert(wIRCd_clients, (gpointer)client->sessionToken, (gpointer)client);
+		if (pthread_create(&ld, NULL, live_or_die, (void*)client)) {
+			if (debug)
+				g_message("Failed to create 'live or die' thread for session: %s", client->sessionToken);
+		}
 		LSMessageReply(lshandle,message,jsonResponse,&lserror);
 		free(jsonResponse);
 	} else {
