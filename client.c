@@ -60,6 +60,8 @@ void *live_or_die(void *ptr) {
 	wIRCd_client_t *client = (wIRCd_client_t *)ptr;
 	sleep(60);
 	if (!client->thread) {
+		if (debug)
+			g_message("Destroying unused session: %s", client->sessionToken);
 		g_hash_table_remove(wIRCd_clients, (gconstpointer)client->sessionToken);
 		free(client);
 	}
