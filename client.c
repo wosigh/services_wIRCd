@@ -132,7 +132,8 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		goto done;
 	}
 
-	g_message("Connect request by: %s", client->sessionToken);
+	if (debug)
+		g_message("Connection requested by session: %s", client->sessionToken);
 
 	char *server = 0;
 	char *username = 0;
@@ -280,6 +281,10 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		if (!mode)
 			goto done;
 	}*/
+
+	if (debug && type==quit_) {
+		g_message("Connection quit for session: %s", sessionToken);
+	}
 
 	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
 	if (client) {

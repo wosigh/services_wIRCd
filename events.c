@@ -29,12 +29,6 @@ void process_event(irc_session_t * session, const char * event, const char * ori
 
 	client->estabilshed = 1;
 
-	if (strcmp(event, "CONNECT")==0) {
-		strcpy(client->ip_addr, (char *)inet_ntoa(session->local_addr));
-		if (debug)
-			g_message("Connection established (%s)", client->ip_addr);
-	}
-
 	char buf[1024];
 	int cnt;
 	int i;
@@ -99,6 +93,10 @@ void process_event(irc_session_t * session, const char * event, const char * ori
 }
 
 void handle_event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
+	if (debug) {
+		wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
+		g_message("Connection established on session: %s", client->sessionToken);
+	}
 	process_event(session, event, origin, params, count, event_connect_);
 }
 
@@ -167,6 +165,10 @@ void handle_event_ctcp_action(irc_session_t * session, const char * event, const
 }
 
 void handle_event_unknown(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
+	if (debug) {
+		wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
+		g_message("Unknown event (%s) from session: %s", event, client->sessionToken);
+	}
 	process_event(session, event, origin, params, count, event_unknown_);
 }
 
