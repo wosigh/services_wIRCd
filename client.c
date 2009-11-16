@@ -54,6 +54,28 @@ int irc_custom_cmd_away(irc_session_t *session, const char *reason) {
 	return retVal;
 }
 
+int unrefMessages(wIRCd_client_t *client) {
+	if (client->msg_event_connect) LSMessageUnref(client->msg_event_connect);
+	if (client->msg_event_nick) LSMessageUnref(client->msg_event_nick);
+	if (client->msg_event_quit) LSMessageUnref(client->msg_event_quit);
+	if (client->msg_event_join) LSMessageUnref(client->msg_event_join);
+	if (client->msg_event_part) LSMessageUnref(client->msg_event_part);
+	if (client->msg_event_mode) LSMessageUnref(client->msg_event_mode);
+	if (client->msg_event_umode) LSMessageUnref(client->msg_event_umode);
+	if (client->msg_event_topic) LSMessageUnref(client->msg_event_topic);
+	if (client->msg_event_kick) LSMessageUnref(client->msg_event_kick);
+	if (client->msg_event_channel) LSMessageUnref(client->msg_event_channel);
+	if (client->msg_event_privmsg) LSMessageUnref(client->msg_event_privmsg);
+	if (client->msg_event_notice) LSMessageUnref(client->msg_event_notice);
+	if (client->msg_event_channel_notice) LSMessageUnref(client->msg_event_channel_notice);
+	if (client->msg_event_invite) LSMessageUnref(client->msg_event_invite);
+	if (client->msg_event_ctcp_req) LSMessageUnref(client->msg_event_ctcp_req);
+	if (client->msg_event_ctcp_rep) LSMessageUnref(client->msg_event_ctcp_rep);
+	if (client->msg_event_ctcp_action) LSMessageUnref(client->msg_event_ctcp_action);
+	if (client->msg_event_unknown) LSMessageUnref(client->msg_event_unknown);
+	if (client->msg_event_numeric) LSMessageUnref(client->msg_event_numeric);
+}
+
 
 // Probably a race condition in this, probably need some sort of lock to be safe
 void *live_or_die(void *ptr) {
@@ -102,19 +124,22 @@ void *client_run(void *ptr) {
 
 	}
 
-	/*LSMessageUnref(client->message_monolithic);
-
 	done:
 
-	if (client->session)
-		irc_destroy_session(client->session);
+	g_hash_table_remove(wIRCd_clients, (gconstpointer)client->sessionToken);
 
-	g_hash_table_remove(wIRCd_clients, (gconstpointer)sessionToken);
+	unrefMessages(client);
 
-	if (client)
-		free(client);*/
-
-	done:
+	if (client->session) irc_destroy_session(client->session);
+	if (client->thread) free(client->thread);
+	if (client->interface) free(client->interface);
+	if (client->username) free(client->username);
+	if (client->sessionToken) free(client->sessionToken);
+	if (client->server_password) free(client->server_password);
+	if (client->server) free(client->server);
+	if (client->realname) free(client->realname);
+	if (client->nick) free(client->nick);
+	if (client) free(client);
 
 	LSErrorFree(&lserror);
 
