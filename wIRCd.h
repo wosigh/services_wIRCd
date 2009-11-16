@@ -37,25 +37,25 @@ GHashTable *wIRCd_clients;
 irc_callbacks_t	callbacks;
 
 typedef enum {
-	event_connect_,
-	event_nick_,
-	event_quit_,
-	event_join_,
-	event_part_,
-	event_mode_,
-	event_umode_,
-	event_topic_,
-	event_kick_,
-	event_channel_,
-	event_privmsg_,
-	event_notice_,
-	event_channel_notice_,
-	event_invite_,
-	event_ctcp_req_,
-	event_ctcp_rep_,
-	event_ctcp_action_,
-	event_unknown_,
-	event_numeric_,
+	event_connect_,				// 0
+	event_nick_,				// 1
+	event_quit_,				// 2
+	event_join_,				// 3
+	event_part_,				// 4
+	event_mode_,				// 5
+	event_umode_,				// 6
+	event_topic_,				// 7
+	event_kick_,				// 8
+	event_channel_,				// 9
+	event_privmsg_,				// 10
+	event_notice_,				// 11
+	event_channel_notice_,		// 12
+	event_invite_,				// 13
+	event_ctcp_req_,			// 14
+	event_ctcp_rep_,			// 15
+	event_ctcp_action_,			// 16
+	event_unknown_,				// 17
+	event_numeric_,				// 18
 } irc_callbacks;
 
 #endif /* WIRCD_H_ */
