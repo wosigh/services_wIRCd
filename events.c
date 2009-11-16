@@ -25,8 +25,7 @@
 
 void process_event(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count, irc_callbacks type) {
 
-	char *sessionToken = (char*)irc_get_ctx(session);
-	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
+	wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
 
 	client->estabilshed = 1;
 
@@ -61,7 +60,7 @@ void process_event(irc_session_t * session, const char * event, const char * ori
 
 	int len = 0;
 	char *jsonResponse = 0;
-	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\",\"ipAddress\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", sessionToken, client->ip_addr, event, origin ? origin : "NULL", buf);
+	len = asprintf(&jsonResponse, "{\"ipAddress\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", client->ip_addr, event, origin ? origin : "NULL", buf);
 
 	LSMessage *message = 0;
 

@@ -35,7 +35,7 @@ bool process_subscription(LSHandle* lshandle, LSMessage *message, irc_callbacks 
 	char *sessionToken = 0;
 	bool subscribe = false;
 	json_get_string(object, "sessionToken", &sessionToken);
-	json_get_bool(object, "subscribe", subscribe);
+	json_get_bool(object, "subscribe", &subscribe);
 
 	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, sessionToken);
 
@@ -54,25 +54,25 @@ bool process_subscription(LSHandle* lshandle, LSMessage *message, irc_callbacks 
 	LSMessageRef(message);
 
 	switch (type) {
-	case event_connect_: client->msg_event_connect; break;
-	case event_nick_: client->msg_event_nick; break;
-	case event_quit_: client->msg_event_quit; break;
-	case event_join_: client->msg_event_join; break;
-	case event_part_: client->msg_event_part; break;
-	case event_mode_: client->msg_event_mode; break;
-	case event_umode_: client->msg_event_umode; break;
-	case event_topic_: client->msg_event_topic; break;
-	case event_kick_: client->msg_event_kick; break;
-	case event_channel_: client->msg_event_channel; break;
-	case event_privmsg_: client->msg_event_privmsg; break;
-	case event_notice_: client->msg_event_notice; break;
-	case event_channel_notice_: client->msg_event_channel_notice; break;
-	case event_invite_: client->msg_event_invite; break;
-	case event_ctcp_req_: client->msg_event_ctcp_req; break;
-	case event_ctcp_rep_: client->msg_event_ctcp_rep; break;
-	case event_ctcp_action_: client->msg_event_ctcp_action; break;
-	case event_unknown_: client->msg_event_unknown; break;
-	case event_numeric_: client->msg_event_numeric; break;
+	case event_connect_: client->msg_event_connect = message; break;
+	case event_nick_: client->msg_event_nick = message; break;
+	case event_quit_: client->msg_event_quit = message; break;
+	case event_join_: client->msg_event_join = message; break;
+	case event_part_: client->msg_event_part = message; break;
+	case event_mode_: client->msg_event_mode = message; break;
+	case event_umode_: client->msg_event_umode = message; break;
+	case event_topic_: client->msg_event_topic = message; break;
+	case event_kick_: client->msg_event_kick = message; break;
+	case event_channel_: client->msg_event_channel = message; break;
+	case event_privmsg_: client->msg_event_privmsg = message; break;
+	case event_notice_: client->msg_event_notice = message; break;
+	case event_channel_notice_: client->msg_event_channel_notice = message; break;
+	case event_invite_: client->msg_event_invite = message; break;
+	case event_ctcp_req_: client->msg_event_ctcp_req = message; break;
+	case event_ctcp_rep_: client->msg_event_ctcp_rep = message; break;
+	case event_ctcp_action_: client->msg_event_ctcp_action = message; break;
+	case event_unknown_: client->msg_event_unknown = message; break;
+	case event_numeric_: client->msg_event_numeric = message; break;
 	}
 
 	end:

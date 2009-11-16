@@ -22,7 +22,7 @@ LIBS			= 	-lglib-2.0 -llunaservice
 
 PROGRAM			= 	us.ryanhope.wircd
 
-OBJECTS			= 	events.o connection.o subscriptions.o client.o luna_service.o main.o
+OBJECTS			= 	events.o subscriptions.o client.o luna_service.o main.o
 
 ARCHIVES		=	libircclient/src/libircclient.a
 
@@ -34,10 +34,10 @@ all: $(PROGRAM)
 fresh: clean all
 
 $(PROGRAM): $(OBJECTS)
-	$(CC) $(OBJECTS) $(ARCHIVES) -o $(PROGRAM) $(INCLUDES) $(LIBS)
+	$(CC) -g $(OBJECTS) $(ARCHIVES) -o $(PROGRAM) $(INCLUDES) $(LIBS)
 
 $(OBJECTS): %.o: %.c
-	$(CC) -DVERSION=\"$(VERSION)\" -c $<  -o $@ -I. $(INCLUDES) $(LIBS)
+	$(CC) -g -DVERSION=\"$(VERSION)\" -c $<  -o $@ -I. $(INCLUDES) $(LIBS)
 	
 clean-objects:
 	rm -rf $(OBJECTS)

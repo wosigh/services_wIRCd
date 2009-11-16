@@ -54,46 +54,12 @@ int irc_custom_cmd_away(irc_session_t *session, const char *reason) {
 	return retVal;
 }
 
-void *client_run(void *sessionToken) {
+void *client_run(void *ptr) {
 
 	LSError lserror;
 	LSErrorInit(&lserror);
 
-	wIRCd_client_t *client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, (char*)sessionToken);
-
-	client->server = 0;
-	client->port = 0;
-	client->server_password = 0;
-	client->nick = 0;
-	client->username = 0;
-	client->realname = 0;
-	client->estabilshed = 0;
-	client->interface = 0;
-
-	json_t *object = LSMessageGetPayloadJSON(client->message_monolithic);
-
-	// Basic connection info
-	json_get_string(object, "server", &client->server); // Required
-	json_get_int(object, "port", &client->port);
-
-	// Server related connection info
-	json_get_string(object, "username", &client->username);
-	json_get_string(object, "server_password", &client->server_password);
-
-	// Basic user info
-	json_get_string(object, "nick", &client->nick); // Required
-	json_get_string(object, "realname", &client->realname);
-
-	// Extra info
-	json_get_string(object, "interface", &client->interface);
-
-	if (!client->server) {
-		LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);
-		goto done;
-	} else if (!client->nick) {
-		LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":-1,\"errorText\":\"Nick missing\"}",&lserror);
-		goto done;
-	}
+	wIRCd_client_t *client = (wIRCd_client_t*)ptr;
 
 	int retry = 0;
 
@@ -101,13 +67,14 @@ void *client_run(void *sessionToken) {
 
 		client->session = irc_create_session(&callbacks, client->interface);
 		if (!client->session) {
-			LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
+			//LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":-1,\"errorText\":\"Failed to create session\"}",&lserror);
 			goto done;
 		}
 
+		irc_set_ctx(client->session, client);
+
 		int c = irc_connect(client->session, client->server, (unsigned short int)client->port?client->port:6667,
 				client->server_password, client->nick, client->username?client->username:"wIRCer", client->realname);
-		irc_set_ctx(client->session,(void*)sessionToken);
 		usleep(pre_run_usleep);
 		irc_run(client->session);
 
@@ -122,8 +89,7 @@ void *client_run(void *sessionToken) {
 
 	}
 
-	LSMessageReply(pub_serviceHandle,client->message_monolithic,"{\"returnValue\":0}",&lserror);
-	LSMessageUnref(client->message_monolithic);
+	/*LSMessageUnref(client->message_monolithic);
 
 	done:
 
@@ -133,7 +99,9 @@ void *client_run(void *sessionToken) {
 	g_hash_table_remove(wIRCd_clients, (gconstpointer)sessionToken);
 
 	if (client)
-		free(client);
+		free(client);*/
+
+	done:
 
 	LSErrorFree(&lserror);
 
@@ -146,19 +114,78 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	LSError lserror;
 	LSErrorInit(&lserror);
 
-	LSMessageRef(message);
+	json_t *object = LSMessageGetPayloadJSON(message);
 
-	wIRCd_client_t *client = calloc(1,sizeof(wIRCd_client_t));
-	client->message_monolithic = message;
+	char *sessionToken = 0;
+	json_get_string(object, "sessionToken", &sessionToken);
 
-	const char* sessionToken = LSMessageGetUniqueToken(message)+1;
+	if (!sessionToken) {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Missing sessionToken\"}",&lserror);
+		goto done;
+	}
 
-	g_hash_table_insert(wIRCd_clients, (gpointer)sessionToken, (gpointer)client);
+	wIRCd_client_t *client = 0;
+	client = (wIRCd_client_t*)g_hash_table_lookup(wIRCd_clients, (gconstpointer)sessionToken);
 
-	if (pthread_create(&client->thread, NULL, client_run, (void*)sessionToken)) {
+	if (!client) {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Invalid sessionToken\"}",&lserror);
+		goto done;
+	}
+
+	g_message("Connect request by: %s", client->sessionToken);
+
+	char *server = 0;
+	char *username = 0;
+	char *server_password = 0;
+	char *nick = 0;
+	char *realname = 0;
+	char *interface = 0;
+	int port = 0;
+
+	// Basic connection info
+	json_get_string(object, "server", &server); // Required
+	json_get_int(object, "port", &client->port);
+
+	// Server related connection info
+	json_get_string(object, "username", &username);
+	json_get_string(object, "server_password", &server_password);
+
+	// Basic user info
+	json_get_string(object, "nick", &nick); // Required
+	json_get_string(object, "realname", &realname);
+
+	// Extra info
+	json_get_string(object, "interface", &interface);
+
+	if (server)
+		client->server = strdup(server);
+	if (username)
+		client->username = strdup(username);
+	if (server_password)
+		client->server_password = strdup(server_password);
+	if (nick)
+		client->nick = strdup(nick);
+	if (realname)
+		client->realname = strdup(realname);
+	if (interface)
+		client->interface = strdup(interface);
+
+	if (!client->server) {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Server missing\"}",&lserror);
+		goto done;
+	} else if (!client->nick) {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Nick missing\"}",&lserror);
+		goto done;
+	}
+
+	client->thread = (pthread_t*)malloc(sizeof(pthread_t));
+	if (pthread_create(client->thread, NULL, client_run, (void*)client)) {
 		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
 		retVal = false;
 	}
+	LSMessageReply(lshandle,message,"{\"returnValue\":0}",&lserror);
+
+	done:
 
 	LSErrorFree(&lserror);
 
@@ -401,9 +428,41 @@ bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 }
 
+bool client_init(LSHandle* lshandle, LSMessage *message, void *ctx) {
+
+	LSError lserror;
+	LSErrorInit(&lserror);
+
+	int len = 0;
+
+	wIRCd_client_t *client = calloc(1,sizeof(wIRCd_client_t));
+	len = asprintf(&client->sessionToken, "%s", LSMessageGetUniqueToken(message)+1);
+
+	client->estabilshed = 0;
+
+	char *jsonResponse = 0;
+
+	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\"}", client->sessionToken);
+	if (jsonResponse) {
+		g_hash_table_insert(wIRCd_clients, (gpointer)client->sessionToken, (gpointer)client);
+		LSMessageReply(lshandle,message,jsonResponse,&lserror);
+		free(jsonResponse);
+	} else {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed creating wIRCd client object\"}",&lserror);
+		free(client);
+	}
+
+	LSErrorFree(&lserror);
+
+	return true;
+
+}
+
 LSMethod lscommandmethods[] = {
 		// Connection subscription
 		{"client_connect",client_connect},
+		// Init method
+		{"client_init",client_init},
 		// Message methods
 		{"client_cmd_msg",client_cmd_msg},
 		{"client_cmd_me",client_cmd_me},
@@ -435,5 +494,5 @@ LSMethod lscommandmethods[] = {
 
 bool register_commands(LSPalmService *serviceHandle, LSError lserror) {
 	return LSPalmServiceRegisterCategory(serviceHandle, "/", lscommandmethods,
-				NULL, NULL, NULL, &lserror);
+			NULL, NULL, NULL, &lserror);
 }
