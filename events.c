@@ -54,7 +54,7 @@ void process_event(irc_session_t * session, const char * event, const char * ori
 
 	int len = 0;
 	char *jsonResponse = 0;
-	len = asprintf(&jsonResponse, "{\"ipAddress\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", client->ip_addr, event, origin ? origin : "NULL", buf);
+	len = asprintf(&jsonResponse, "{\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", event, origin ? origin : "", buf);
 
 	LSMessage *message = 0;
 
