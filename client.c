@@ -109,7 +109,7 @@ void *client_run(void *ptr) {
 		irc_set_ctx(client->session, client);
 
 		int c = irc_connect(client->session, client->server, (unsigned short int)client->port?client->port:6667,
-				client->server_password, client->nick, client->username?client->username:"wIRCer", client->realname);
+				client->server_password, client->nick, client->username?client->username:"wirc_user", client->realname);
 		usleep(pre_run_usleep);
 		irc_run(client->session);
 
