@@ -1,4 +1,4 @@
-us.ryanhope.wircd
+us.ryanhope.wircd*
 !upstart/us.ryanhope.wircd
 libircclient/autom4te.cache
 libircclient/config.log

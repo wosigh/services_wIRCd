@@ -20,11 +20,14 @@ endif
 
 ifeq ($(DEVICE),pre)
 	MARCH_TUNE	=	-march=armv7-a -mtune=cortex-a8
+	SUFFIX		=	-armv7
 else
 ifeq ($(DEVICE),pixi)
 	MARCH_TUNE	=	-march=armv6j -mtune=arm1136j-s
+	SUFFIX		=	-armv6
 else
 ifeq ($(DEVICE),emu)
+	SUFFIX		=	-i686
 endif
 endif
 endif
@@ -33,7 +36,9 @@ CFLAGS			=	-Os -g $(MARCH_TUNE) -DVERSION=\"$(VERSION)\"
 					
 LIBS			= 	-lglib-2.0 -llunaservice
 
-PROGRAM			= 	us.ryanhope.wircd
+PROGRAM_BASE	=	us.ryanhope.wircd
+
+PROGRAM			= 	$(PROGRAM_BASE)$(SUFFIX)
 
 OBJECTS			= 	events.o subscriptions.o client.o luna_service.o main.o
 
@@ -56,4 +61,4 @@ clean-objects:
 	rm -rf $(OBJECTS)
 	
 clean: clean-objects
-	rm -rf $(PROGRAM)
+	rm -rf $(PROGRAM_BASE)*
