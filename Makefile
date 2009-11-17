@@ -9,7 +9,7 @@ MAIN_INCLUDES	=	-I. \
 					-I$(CROSS_COMPILE_ROOT)/usr/include/mjson \
 					-Ilibircclient/include
 					
-ifeq ($(CS_TOOLCHAIN_ROOT),"")				
+ifeq ($(CS_TOOLCHAIN_ROOT),)				
 	INCLUDES	=	$(MAIN_INCLUDES)
 else
 	INCLUDES	=	-L$(CS_TOOLCHAIN_ROOT)/arm-none-linux-gnueabi/libc/usr/lib \
@@ -17,6 +17,18 @@ else
 					-L$(CROSS_COMPILE_ROOT)/usr/lib \
 					$(MAIN_INCLUDES)
 endif
+
+ifeq ($(DEVICE),pre)		
+	MARCH_TUNE	=	-march=armv7-a -mtune=cortex-a8
+else
+ifeq ($(DEVICE),pixi)
+else
+ifeq ($(DEVICE),emu)
+endif
+endif
+endif
+
+CFLAGS			=	-Os -g $(MARCH_TUNE) -DVERSION=\"$(VERSION)\"
 					
 LIBS			= 	-lglib-2.0 -llunaservice
 
@@ -34,10 +46,10 @@ all: $(PROGRAM)
 fresh: clean all
 
 $(PROGRAM): $(OBJECTS)
-	$(CC) -g $(OBJECTS) $(ARCHIVES) -o $(PROGRAM) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJECTS) $(ARCHIVES) -o $(PROGRAM) $(INCLUDES) $(LIBS)
 
 $(OBJECTS): %.o: %.c
-	$(CC) -g -DVERSION=\"$(VERSION)\" -c $<  -o $@ -I. $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -c $<  -o $@ -I. $(INCLUDES) $(LIBS)
 	
 clean-objects:
 	rm -rf $(OBJECTS)
