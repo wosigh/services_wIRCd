@@ -16,60 +16,36 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  =============================================================================*/
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <glib.h>
+#include <unistd.h>
 
 #include "wIRCd.h"
 
-const char 		*dbusAddress 		= "us.ryanhope.wIRCd";
-
-GMainLoop		*loop				= NULL;
-
-bool luna_service_initialize() {
-
-	bool retVal = FALSE;
+bool init_client(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	LSError lserror;
 	LSErrorInit(&lserror);
 
-	loop = g_main_loop_new(NULL, FALSE);
-	if (loop==NULL)
-		goto end;
+	const char *sessionToken = LSMessageGetUniqueToken(message)+1;
+	wIRCd_client_t *client = calloc(1,sizeof(wIRCd_client_t));
 
-	retVal = LSRegisterPalmService(dbusAddress, &serviceHandle, &lserror);
-	if (retVal) {
-		pub_serviceHandle = LSPalmServiceGetPublicConnection(serviceHandle);
-		priv_serviceHandle = LSPalmServiceGetPrivateConnection(serviceHandle);
-	} else
-		goto end;
+	int len = 0;
+	char *jsonResponse = 0;
 
-	register_commands(serviceHandle, lserror);
-	register_subscriptions(serviceHandle, lserror);
-
-	LSGmainAttachPalmService(serviceHandle, loop, &lserror);
-
-	end: if (LSErrorIsSet(&lserror)) {
-		LSErrorPrint(&lserror, stderr);
-		LSErrorFree(&lserror);
+	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\"}", sessionToken);
+	if (jsonResponse) {
+		g_hash_table_insert(wIRCd_clients, (gpointer)sessionToken, (gpointer)client);
+		LSMessageReply(lshandle,message,jsonResponse,&lserror);
+		free(jsonResponse);
+	} else {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed creating wIRCd client object\"}",&lserror);
+		free(client);
 	}
 
-	return retVal;
+	LSErrorFree(&lserror);
 
-}
-
-void luna_service_start() {
-
-	setup_event_callbacks();
-
-	wIRCd_clients = g_hash_table_new(g_str_hash, g_str_equal);
-	if (wIRCd_clients)
-		g_main_loop_run(loop);
-
-}
-
-void luna_service_cleanup() {
-
-	if (wIRCd_clients)
-		g_hash_table_destroy(wIRCd_clients);
+	return true;
 
 }
