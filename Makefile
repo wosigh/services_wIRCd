@@ -22,6 +22,7 @@ ifeq ($(DEVICE),pre)
 	MARCH_TUNE	=	-march=armv7-a -mtune=cortex-a8
 else
 ifeq ($(DEVICE),pixi)
+	MARCH_TUNE	=	-march=armv6j -mtune=arm1136j-s
 else
 ifeq ($(DEVICE),emu)
 endif
