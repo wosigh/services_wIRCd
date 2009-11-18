@@ -81,12 +81,14 @@ int unrefMessages(wIRCd_client_t *client) {
 void *live_or_die(void *ptr) {
 	wIRCd_client_t *client = (wIRCd_client_t *)ptr;
 	sleep(60);
-	if (!client->thread) {
+	if (pthread_mutex_trylock(&client->mutex)==0) {
 		if (debug)
 			g_message("Destroying unused session: %s", client->sessionToken);
 		g_hash_table_remove(wIRCd_clients, (gconstpointer)client->sessionToken);
-		free(client);
-	}
+		if (client->sessionToken) free(client->sessionToken);
+		if (client) free(client);
+	} else
+		if (debug) g_message("Failed to get lock in live or die thread!", client->sessionToken);
 }
 
 void *client_run(void *ptr) {
@@ -131,7 +133,6 @@ void *client_run(void *ptr) {
 	unrefMessages(client);
 
 	if (client->session) irc_destroy_session(client->session);
-	if (client->thread) free(client->thread);
 	if (client->interface) free(client->interface);
 	if (client->username) free(client->username);
 	if (client->sessionToken) free(client->sessionToken);
@@ -169,6 +170,11 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Invalid sessionToken\"}",&lserror);
 		goto done;
 	}
+
+	if (pthread_mutex_trylock(&client->mutex)!=0) {
+		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Expired sessionToken\"}",&lserror);
+		goto done;
+	} else pthread_cancel(client->live_or_die_thread);
 
 	if (debug)
 		g_message("Connection requested by session: %s", client->sessionToken);
@@ -217,8 +223,8 @@ bool client_connect(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		goto done;
 	}
 
-	client->thread = (pthread_t*)malloc(sizeof(pthread_t));
-	if (pthread_create(client->thread, NULL, client_run, (void*)client)) {
+	//client->worker_thread = (pthread_t)malloc(sizeof(pthread_t));
+	if (pthread_create(&client->worker_thread, NULL, client_run, (void*)client)) {
 		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed to create thread\"}",&lserror);
 		retVal = false;
 	}
@@ -482,15 +488,15 @@ bool client_init(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	len = asprintf(&client->sessionToken, "%s", LSMessageGetUniqueToken(message)+1);
 
 	client->estabilshed = 0;
-	client->thread = 0;
+	client->worker_thread = 0;
 
 	char *jsonResponse = 0;
 
 	len = asprintf(&jsonResponse, "{\"sessionToken\":\"%s\"}", client->sessionToken);
 	if (jsonResponse) {
-		pthread_t ld;
 		g_hash_table_insert(wIRCd_clients, (gpointer)client->sessionToken, (gpointer)client);
-		if (pthread_create(&ld, NULL, live_or_die, (void*)client)) {
+		//client->live_or_die_thread = (pthread_t)malloc(sizeof(pthread_t));
+		if (pthread_create(&client->live_or_die_thread, NULL, live_or_die, (void*)client)) {
 			if (debug)
 				g_message("Failed to create 'live or die' thread for session: %s", client->sessionToken);
 		}
@@ -498,7 +504,7 @@ bool client_init(LSHandle* lshandle, LSMessage *message, void *ctx) {
 		free(jsonResponse);
 	} else {
 		LSMessageReply(lshandle,message,"{\"returnValue\":-1,\"errorText\":\"Failed creating wIRCd client object\"}",&lserror);
-		free(client);
+		if (client) free(client);
 	}
 
 	LSErrorFree(&lserror);

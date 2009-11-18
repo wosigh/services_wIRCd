@@ -33,9 +33,11 @@ typedef pthread_mutex_t port_mutex_t;
 #include <libirc_session.h>
 
 typedef struct {
+	pthread_mutex_t mutex;
 	char 			*sessionToken;
 	irc_session_t	*session;
-	pthread_t		*thread;
+	pthread_t		worker_thread;
+	pthread_t		live_or_die_thread;
 	char	 		*server;
 	int			 	port;
 	char 			*server_password;
