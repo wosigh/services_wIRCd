@@ -65,6 +65,7 @@ typedef struct {
 	LSMessage		*msg_event_ctcp_action;
 	LSMessage		*msg_event_unknown;
 	LSMessage		*msg_event_numeric;
+	LSMessage		*msg_get_session_ip;
 } wIRCd_client_t;
 
 bool register_commands(LSPalmService *serviceHandle, LSError lserror);

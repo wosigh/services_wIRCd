@@ -113,17 +113,34 @@ void *client_run(void *ptr) {
 
 		int c = irc_connect(client->session, client->server, (unsigned short int)client->port?client->port:6667,
 				client->server_password, client->nick, client->username?client->username:"wirc", client->realname);
-		usleep(pre_run_usleep);
-		irc_run(client->session);
+
+		if (irc_is_connected(client->session)) {
+			if (client->msg_get_session_ip) {
+				int len = 0;
+				char *jsonResponse = 0;
+				len = asprintf(&jsonResponse, "{\"ipAddress\":\"%s\"}", (char *)inet_ntoa(client->session->local_addr));
+				if (jsonResponse) {
+					LSMessageReply(pub_serviceHandle,client->msg_get_session_ip,jsonResponse,&lserror);
+					free(jsonResponse);
+				}
+			}
+			usleep(pre_run_usleep);
+			irc_run(client->session);
+		} else
+			goto retry;
 
 		if (client->estabilshed) {
-			break;
+			goto done;
 		} else {
-			irc_destroy_session(client->session);
-			client->session = 0;
-			retry++;
-			g_message("Retry %d", retry);
+			goto retry;
 		}
+
+		retry:
+
+		irc_destroy_session(client->session);
+		client->session = 0;
+		retry++;
+		g_message("Retry %d", retry);
 
 	}
 
@@ -355,13 +372,8 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case away_: retVal = irc_custom_cmd_away(client->session, reason); break;
 		case raw_: retVal = irc_send_raw(client->session, "%s", command); break;
 		case disconnect_: irc_disconnect(client->session); break;
-		case ip_:
-			if (client->session && irc_is_connected(client->session))
-				len = asprintf(&jsonResponse, "{\"ipAddress\":\"%s\"}", (char *)inet_ntoa(client->session->local_addr));
-			break;
 		}
-		if (!jsonResponse)
-			len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
+		len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
 		if (jsonResponse) {
 			LSMessageReply(lshandle,message,jsonResponse,&lserror);
 			free(jsonResponse);
@@ -457,10 +469,6 @@ bool client_send_raw(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, raw_);
 }
 
-bool client_get_session_ip(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_command(lshandle, message, ip_);
-}
-
 // Random info
 
 bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx) {
@@ -553,7 +561,6 @@ LSMethod lscommandmethods[] = {
 		{"client_send_raw",client_send_raw},
 		// Random info
 		{"client_get_version",client_get_version},
-		{"client_get_session_ip",client_get_session_ip},
 		{0,0}
 };
 
