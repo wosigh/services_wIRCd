@@ -13,7 +13,7 @@ ifeq ($(CS_TOOLCHAIN_ROOT),)
 	INCLUDES	=	$(MAIN_INCLUDES)
 else
 	INCLUDES	=	-L$(CS_TOOLCHAIN_ROOT)/arm-none-linux-gnueabi/libc/usr/lib \
-					-Xlinker -rpath-link=/opt/arm-none-linux-gnueabi/usr/lib \
+					-Xlinker -rpath-link=$(CROSS_COMPILE_ROOT)/usr/lib \
 					-L$(CROSS_COMPILE_ROOT)/usr/lib \
 					$(MAIN_INCLUDES)
 endif
