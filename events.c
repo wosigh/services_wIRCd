@@ -54,7 +54,10 @@ void process_event(irc_session_t * session, const char * event, const char * ori
 
 	int len = 0;
 	char *jsonResponse = 0;
-	len = asprintf(&jsonResponse, "{\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", event, origin ? origin : "", buf);
+	if (type == event_connect_) {
+		len = asprintf(&jsonResponse, "{\"sessionIpAddress\":\"%s\",\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", inet_ntoa(client->session->local_addr), event, origin ? origin : "", buf);
+	} else
+		len = asprintf(&jsonResponse, "{\"event\":\"%s\",\"origin\":\"%s\",\"params\":[%s]}", event, origin ? origin : "", buf);
 
 	LSMessage *message = 0;
 

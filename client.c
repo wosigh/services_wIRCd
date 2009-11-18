@@ -355,13 +355,8 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case away_: retVal = irc_custom_cmd_away(client->session, reason); break;
 		case raw_: retVal = irc_send_raw(client->session, "%s", command); break;
 		case disconnect_: irc_disconnect(client->session); break;
-		case ip_:
-			if (client->session && irc_is_connected(client->session))
-				len = asprintf(&jsonResponse, "{\"ipAddress\":\"%s\"}", (char *)inet_ntoa(client->session->local_addr));
-			break;
 		}
-		if (!jsonResponse)
-			len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
+		len = asprintf(&jsonResponse, "{\"returnValue\":%d}", retVal);
 		if (jsonResponse) {
 			LSMessageReply(lshandle,message,jsonResponse,&lserror);
 			free(jsonResponse);
@@ -457,10 +452,6 @@ bool client_send_raw(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_command(lshandle, message, raw_);
 }
 
-bool client_get_session_ip(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_command(lshandle, message, ip_);
-}
-
 // Random info
 
 bool client_get_version(LSHandle* lshandle, LSMessage *message, void *ctx) {
@@ -553,7 +544,6 @@ LSMethod lscommandmethods[] = {
 		{"client_send_raw",client_send_raw},
 		// Random info
 		{"client_get_version",client_get_version},
-		{"client_get_session_ip",client_get_session_ip},
 		{0,0}
 };
 
