@@ -73,7 +73,6 @@ bool process_subscription(LSHandle* lshandle, LSMessage *message, irc_callbacks 
 	case event_ctcp_action_: client->msg_event_ctcp_action = message; break;
 	case event_unknown_: client->msg_event_unknown = message; break;
 	case event_numeric_: client->msg_event_numeric = message; break;
-	case -1: client->msg_get_session_ip = message; break;
 	}
 
 	end:
@@ -160,12 +159,7 @@ bool sub_event_numeric(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_subscription(lshandle, message, event_numeric_);
 }
 
-bool get_session_ip(LSHandle* lshandle, LSMessage *message, void *ctx) {
-	return process_subscription(lshandle, message, -1);
-}
-
 LSMethod lssubscriptionmethods[] = {
-		// libircclient callbacks
 		{"event_connect", sub_event_connect},
 		{"event_nick", sub_event_nick},
 		{"event_quit", sub_event_quit},
@@ -185,8 +179,6 @@ LSMethod lssubscriptionmethods[] = {
 		{"event_ctcp_action", sub_event_ctcp_action},
 		{"event_unknown", sub_event_unknown},
 		{"event_numeric", sub_event_numeric},
-		// custom subscriptions
-		{"get_session_ip", get_session_ip},
 		{0,0}
 };
 
