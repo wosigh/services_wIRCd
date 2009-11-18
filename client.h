@@ -34,19 +34,18 @@ typedef pthread_mutex_t port_mutex_t;
 
 typedef struct {
 	pthread_mutex_t mutex;
-	char 			*sessionToken;
-	irc_session_t	*session;
 	pthread_t		worker_thread;
 	pthread_t		live_or_die_thread;
+	irc_session_t	*session;
+	char 			*sessionToken;
 	char	 		*server;
-	int			 	port;
 	char 			*server_password;
 	char 			*nick;
 	char 			*username;
 	char 			*realname;
 	char			*interface;
 	int				estabilshed;
-	char ip_addr[16];
+	int			 	port;
 	LSMessage		*msg_event_connect;
 	LSMessage		*msg_event_nick;
 	LSMessage		*msg_event_quit;
