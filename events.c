@@ -104,7 +104,7 @@ void *ping_server(void *ptr) {
 			ftime(&client->ping);
 			irc_send_raw(client->session, "PING %s", client->realServer);
 		}
-		sleep(10);
+		sleep(5);
 	}
 }
 
