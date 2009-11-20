@@ -20,6 +20,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
+#include <sys/timeb.h>
 
 #include "wIRCd.h"
 
@@ -168,10 +170,17 @@ void handle_event_ctcp_action(irc_session_t * session, const char * event, const
 }
 
 void handle_event_unknown(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
-	if (debug) {
-		wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
-		g_message("Unknown event (%s) from session: %s", event, client->sessionToken);
+
+	wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
+
+	if (strcmp(event,"PONG")==0) {
+		struct timeb pong;
+		ftime(&pong);
+		if (debug)
+			g_message("PING/PONG RTT from %s: %ld", params[0], (pong.time*1000+pong.millitm)-(client->ping.time*1000+client->ping.millitm));
+		pthread_mutex_unlock(&client->ping_mutex);
 	}
+
 	process_event(session, event, origin, params, count, event_unknown_);
 }
 

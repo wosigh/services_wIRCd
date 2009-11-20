@@ -20,6 +20,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
+#include <sys/timeb.h>
 
 #include "wIRCd.h"
 
@@ -76,7 +78,6 @@ int unrefMessages(wIRCd_client_t *client) {
 	if (client->msg_event_unknown) LSMessageUnref(client->msg_event_unknown);
 	if (client->msg_event_numeric) LSMessageUnref(client->msg_event_numeric);
 }
-
 
 // Probably a race condition in this, probably need some sort of lock to be safe
 void *live_or_die(void *ptr) {
@@ -351,7 +352,13 @@ bool process_command(LSHandle* lshandle, LSMessage *message, irc_cmd type) {
 		case quit_: retVal = irc_cmd_quit(client->session, reason); break;
 		case whois_: retVal = irc_cmd_whois(client->session, nick); break;
 		case user_mode_: retVal = irc_cmd_user_mode(client->session, mode); break;
-		case ping_: retVal = irc_send_raw(client->session,"PING :%s",server); break;
+		case ping_:
+			if (pthread_mutex_trylock(&client->ping_mutex)==0) {
+				ftime(&client->ping);
+				irc_send_raw(client->session, "PING %s", server);
+				retVal = 0;
+			} else retVal = 1;
+			break;
 		case away_: retVal = irc_custom_cmd_away(client->session, reason); break;
 		case raw_: retVal = irc_send_raw(client->session, "%s", command); break;
 		case disconnect_: irc_disconnect(client->session); break;
@@ -481,6 +488,11 @@ bool client_init(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	LSError lserror;
 	LSErrorInit(&lserror);
+
+	if (debug) {
+		g_message("%s",LSMessageGetApplicationID(message));
+		g_message("%s",LSMessageGetSender(message));
+	}
 
 	int len = 0;
 
