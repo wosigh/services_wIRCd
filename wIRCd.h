@@ -56,6 +56,7 @@ typedef enum {
 	event_ctcp_action_,			// 16
 	event_unknown_,				// 17
 	event_numeric_,				// 18
+	auto_ping_,					// 19
 } irc_callbacks;
 
 #endif /* WIRCD_H_ */

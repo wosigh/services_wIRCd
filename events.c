@@ -97,11 +97,23 @@ void process_event(irc_session_t * session, const char * event, const char * ori
 
 }
 
+void *ping_server(void *ptr) {
+	wIRCd_client_t *client = (wIRCd_client_t *)ptr;
+	while (client->ping_server) {
+		if (pthread_mutex_trylock(&client->ping_mutex)==0) {
+			ftime(&client->ping);
+			irc_send_raw(client->session, "PING %s", client->realServer);
+		}
+		sleep(10);
+	}
+}
+
 void handle_event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
 
 	wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
 
 	client->realServer = strdup(origin);
+	pthread_create(&client->ping_thread, NULL, ping_server, (void*)client);
 
 	if (debug)
 		g_message("Connection established on session: %s", client->sessionToken);
@@ -178,10 +190,24 @@ void handle_event_unknown(irc_session_t * session, const char * event, const cha
 	wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
 
 	if (strcmp(event,"PONG")==0) {
+		LSError lserror;
+		LSErrorInit(&lserror);
 		struct timeb pong;
 		ftime(&pong);
+		long rtt = (pong.time*1000+pong.millitm)-(client->ping.time*1000+client->ping.millitm);
 		if (debug)
-			g_message("PING/PONG RTT from %s: %ld", params[0], (pong.time*1000+pong.millitm)-(client->ping.time*1000+client->ping.millitm));
+			g_message("PING/PONG RTT from %s: %ld", params[0], rtt);
+		if (client->msg_auto_ping) {
+			int len = 0;
+			char *jsonResponse = 0;
+			len = asprintf(&jsonResponse, "{\"server\":\"%s\",\"rtt\":%ld}", params[0], rtt);
+			if (jsonResponse) {
+				LSMessageReply(pub_serviceHandle,client->msg_auto_ping,jsonResponse,&lserror);
+				free(jsonResponse);
+			} else
+				LSMessageReply(pub_serviceHandle,client->msg_auto_ping,"{\"returnValue\":-1,\"errorText\":\"Generic error\"}",&lserror);
+		}
+		LSErrorFree(&lserror);
 		pthread_mutex_unlock(&client->ping_mutex);
 	}
 

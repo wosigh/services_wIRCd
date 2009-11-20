@@ -73,6 +73,7 @@ bool process_subscription(LSHandle* lshandle, LSMessage *message, irc_callbacks 
 	case event_ctcp_action_: client->msg_event_ctcp_action = message; break;
 	case event_unknown_: client->msg_event_unknown = message; break;
 	case event_numeric_: client->msg_event_numeric = message; break;
+	case auto_ping_: client->msg_auto_ping = message; break;
 	}
 
 	end:
@@ -159,6 +160,10 @@ bool sub_event_numeric(LSHandle* lshandle, LSMessage *message, void *ctx) {
 	return process_subscription(lshandle, message, event_numeric_);
 }
 
+bool sub_auto_ping(LSHandle* lshandle, LSMessage *message, void *ctx) {
+	return process_subscription(lshandle, message, auto_ping_);
+}
+
 LSMethod lssubscriptionmethods[] = {
 		{"event_connect", sub_event_connect},
 		{"event_nick", sub_event_nick},
@@ -179,6 +184,7 @@ LSMethod lssubscriptionmethods[] = {
 		{"event_ctcp_action", sub_event_ctcp_action},
 		{"event_unknown", sub_event_unknown},
 		{"event_numeric", sub_event_numeric},
+		{"auto_ping", sub_auto_ping},
 		{0,0}
 };
 

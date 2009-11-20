@@ -38,7 +38,8 @@ typedef struct {
 	pthread_mutex_t mutex;
 	pthread_t		worker_thread;
 	pthread_t		live_or_die_thread;
-	pthread_t		process_pings_thread;
+	pthread_t		ping_thread;
+	bool			ping_server;
 	irc_session_t	*session;
 	char 			*sessionToken;
 	char	 		*server;
@@ -69,6 +70,7 @@ typedef struct {
 	LSMessage		*msg_event_ctcp_action;
 	LSMessage		*msg_event_unknown;
 	LSMessage		*msg_event_numeric;
+	LSMessage		*msg_auto_ping;
 	pthread_mutex_t ping_mutex;
 	struct timeb 	ping;
 } wIRCd_client_t;

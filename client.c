@@ -77,6 +77,7 @@ int unrefMessages(wIRCd_client_t *client) {
 	if (client->msg_event_ctcp_action) LSMessageUnref(client->msg_event_ctcp_action);
 	if (client->msg_event_unknown) LSMessageUnref(client->msg_event_unknown);
 	if (client->msg_event_numeric) LSMessageUnref(client->msg_event_numeric);
+	if (client->msg_auto_ping) LSMessageUnref(client->msg_auto_ping);
 }
 
 // Probably a race condition in this, probably need some sort of lock to be safe
@@ -502,6 +503,8 @@ bool client_init(LSHandle* lshandle, LSMessage *message, void *ctx) {
 
 	client->estabilshed = 0;
 	client->worker_thread = 0;
+	client->ping_server = true;
+	client->msg_auto_ping = 0;
 
 	char *jsonResponse = 0;
 
