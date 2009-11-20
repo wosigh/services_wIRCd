@@ -47,6 +47,7 @@ typedef struct {
 	char 			*username;
 	char 			*realname;
 	char			*interface;
+	char			*realServer;
 	int				estabilshed;
 	int			 	port;
 	LSMessage		*msg_event_connect;

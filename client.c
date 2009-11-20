@@ -142,6 +142,7 @@ void *client_run(void *ptr) {
 	if (client->server) free(client->server);
 	if (client->realname) free(client->realname);
 	if (client->nick) free(client->nick);
+	if (client->realServer) free(client->realServer);
 	if (client) free(client);
 
 	LSErrorFree(&lserror);

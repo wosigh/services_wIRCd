@@ -98,11 +98,15 @@ void process_event(irc_session_t * session, const char * event, const char * ori
 }
 
 void handle_event_connect(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
-	if (debug) {
-		wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
+
+	wIRCd_client_t *client = (wIRCd_client_t*)irc_get_ctx(session);
+
+	client->realServer = strdup(origin);
+
+	if (debug)
 		g_message("Connection established on session: %s", client->sessionToken);
-	}
 	process_event(session, event, origin, params, count, event_connect_);
+
 }
 
 void handle_event_nick(irc_session_t * session, const char * event, const char * origin, const char ** params, unsigned int count) {
