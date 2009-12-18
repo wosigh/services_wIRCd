@@ -3,6 +3,9 @@
 # Stop the service
 /sbin/stop us.ryanhope.wircd
 
+# Remove the service binary
+rm -f /var/usr/bin/us.ryanhope.wircd
+
 # Remove the upstart script
 rm -f /etc/event.d/us.ryanhope.wircd
 
