@@ -2,6 +2,10 @@
 
 PID="us.ryanhope.wircd"
 
+if [ -z "$IPKG_OFFLINE_ROOT" ]; then
+  IPKG_OFFLINE_ROOT=/var
+fi
+
 # Install the upstart script
 rm -f /etc/event.d/${PID}
 cp $IPKG_OFFLINE_ROOT/etc/event.d/${PID} /etc/event.d/${PID}
@@ -12,6 +16,6 @@ mkdir -p /var/usr/bin
 cp $IPKG_OFFLINE_ROOT/usr/bin/${PID} /var/usr/bin/${PID}
 
 # Start the service
-/sbin/start us.ryanhope.wircd
+/sbin/start ${PID}
 
 exit 0
